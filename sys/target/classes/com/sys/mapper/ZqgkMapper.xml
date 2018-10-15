@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.mapper.ZqgkMapper">
+
+	<select id="selectTotalVisits" resultType="Zqgk">
+		SELECT COUNT(*) AS
+		`count` FROM zlvisitdata WHERE TO_DAYS(accesstime) = TO_DAYS(NOW())
+	</select>
+
+	<select id="getQueryHourCount" resultType="Zqgk" parameterType="Zqgk">		
+		SELECT
+		DATE_FORMAT(accesstime,'%H') HOUR,
+		COUNT(*) AS hCount
+		FROM zlvisitdata
+		WHERE TO_DAYS(accesstime) = TO_DAYS(NOW())
+		GROUP BY HOUR(accesstime) ORDER BY HOUR(accesstime);
+	</select>
+	
+	<select id="selectNum" resultType="Zqgk">
+		SELECT COUNT( * ) AS `num` FROM zlvisitdata
+	</select>
+</mapper>

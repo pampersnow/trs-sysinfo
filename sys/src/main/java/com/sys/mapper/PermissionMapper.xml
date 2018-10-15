@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mapper.PermissionMapper" >
+
+<sql id="Base_List">
+	id,permission,description,isDeleted
+</sql>
+
+  	<insert id="insert" parameterType="Permission">
+		insert into t_permissions
+        	(permission,description)
+        values
+        	(#{permission},#{description})
+    </insert>
+    
+    <update id="update" parameterType="Permission">
+    	update t_permissions 
+	    	set permission=#{permission},
+	    		description=#{description} 		  		    		    		
+	    	where id=#{id}
+    </update>
+   
+    <delete id="delete" parameterType="long">
+    	delete from t_permissions
+    		where id=#{id}
+    </delete>
+    
+    <select id="select" parameterType="Permission" resultType="Permission">
+    	select 
+    	<include refid="Base_List" />
+    	from t_permissions
+ 		   	where isDeleted=false
+    	<if test="id!=null"> and id=#{id} </if>
+    	<if test="permission!=null"> and permission=#{permission} </if>
+    	<if test="description!=null"> and description=#{description} </if>
+    </select>
+    
+    <!-- 分页查询 -->
+    <select id="selectByPage" parameterType="map" resultType="Permission">
+    	select 
+    	<include refid="Base_List" />
+    	from t_permissions
+ 		   	where isDeleted=false
+	    	limit #{currPage},#{pageSize}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="selectCount" resultType="Long">
+    	select 
+    		count(id)
+    	from t_permissions
+ 		   	where isDeleted=false
+    </select> 
+
+	<!-- 删除权限和角色关联 -->
+ 	<delete id="delRolePermission" parameterType="RolePermissions">
+ 		delete from t_rolepermissions
+ 			<if test="roleId!=null">where roleId=#{roleId}</if>
+ 			<if test="permissionId!=null">where permissionId=#{permissionId}</if>
+ 	</delete>
+ 	
+ 	<!-- 添加权限和角色关联 -->
+ 	<insert id="addRolePermission" parameterType="RolePermissions">
+ 		insert into t_rolepermissions
+ 			(roleId,permissionId)
+ 		values
+ 			(#{roleId},#{permissionId})
+ 	</insert>
+
+	<!-- 查询权限和角色关联 -->
+	<select id="selectRolePermission" parameterType="RolePermissions" resultType="RolePermissions">
+		select 
+    		roleId,permissionId
+    	from t_rolepermissions
+    	<if test="permissionId!=null">where permissionId=#{permissionId}</if>
+ 		<if test="roleId!=null">where roleId=#{roleId}</if>
+	</select>
+
+</mapper>

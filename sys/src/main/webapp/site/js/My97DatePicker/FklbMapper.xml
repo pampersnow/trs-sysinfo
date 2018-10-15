@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trs.dao.FklbMapper">
+
+	<select id="selectFklbInfo" resultType="Fklb">
+		SELECT * FROM
+		`zlvisitdata` ORDER BY accesstime DESC
+	</select>
+
+	<select id="getTodayInfo" resultType="Fklb">
+		SELECT * FROM zlvisitdata
+		WHERE TO_DAYS(accesstime) = TO_DAYS(NOW());
+	</select>
+
+	<select id="getTheLastThreeDaysInfo" resultType="Fklb">
+		SELECT * FROM
+		zlvisitdata WHERE DATE_SUB(CURDATE(), INTERVAL 2 DAY)
+		&lt;=DATE(accesstime)
+	</select>
+
+	<select id="getThisWeekInfo" resultType="Fklb">
+		SELECT * FROM
+		zlvisitdata WHERE YEARWEEK(DATE_FORMAT(accesstime,'%Y-%m-%d'))
+		=
+		YEARWEEK(NOW());
+	</select>
+
+	<select id="getThisMonthInfo" resultType="Fklb">
+		SELECT * FROM
+		zlvisitdata WHERE DATE_FORMAT( accesstime, '%Y%m' ) = DATE_FORMAT(
+		CURDATE( ) , '%Y%m' )
+		ORDER BY accesstime DESC
+	</select>
+
+	<select id="queryMore" resultType="Fklb" parameterType="String">
+		SELECT * FROM zlvisitdata
+		<where>
+			<if test="siteid != null and siteid != ''">
+				AND siteid LIKE CONCAT(CONCAT(#{siteid},'%'))
+			</if>
+		</where>
+		ORDER BY accesstime DESC
+	</select>
+
+	<select id="selectPeriodOfTimeInfo" resultType="Fklb"
+		parameterType="Date">
+		SELECT *
+		FROM `zlvisitdata`
+		<where>
+			<if test="startTime!=null and startTime!=''">
+    <![CDATA[  and DATE_FORMAT(accesstime, '%Y-%m-%d')>=  DATE_FORMAT(#{startTime}, '%Y-%m-%d')   ]]>
+			</if>
+			<if test="endTime!=null and endTime!=''">
+    <![CDATA[  and DATE_FORMAT(accesstime, '%Y-%m-%d') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d')    ]]>
+			</if>
+		</where>
+	</select>
+</mapper>

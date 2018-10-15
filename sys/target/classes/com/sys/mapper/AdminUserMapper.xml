@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mapper.AdminUserMapper" >
+
+<sql id="Base_List">
+	id,account,password,passwordSalt,isDisabled,isDeleted
+</sql>
+ 
+  <!-- 登录 -->
+  <select id="login" resultType="AdminUser" parameterType="AdminUser" >
+  	select 
+  	<include refid="Base_List" />
+    from t_adminusers
+    where account = #{account} and  password = #{password} 
+  </select>
+  
+  	<insert id="insert" parameterType="AdminUser">
+		insert into t_adminusers
+        	(account,password,passwordSalt,isDisabled)
+        values
+        	(#{account},#{password},#{passwordSalt},#{isDisabled})
+    </insert>
+    
+    <!-- 修改管理员用户密码 -->
+    <update id="update" parameterType="AdminUser">
+    	update t_adminusers 
+	    	set password=#{password}   		  		    		    		
+    	<where>
+    		<if test="id != null"> and id = #{id} </if>
+    		<if test="account != null"> and account = #{account} </if>
+    	</where>
+    </update>
+   
+   <!-- 实现一个伪删除，使用更新，将isDeleted变为true即可 --> 
+    <delete id="delete" parameterType="long">
+    	update t_adminusers 
+    		set isDeleted=true
+    		where id=#{id}
+    </delete>
+    
+    <select id="select" parameterType="AdminUser" resultType="AdminUser">
+    	select 
+    	<include refid="Base_List" />
+    	from t_adminusers
+ 		   	where isDeleted=false
+    	<if test="id!=null"> and id=#{id} </if>
+    	<if test="account!=null"> and account=#{account} </if>
+    	<if test="password!=null"> and password=#{password} </if>
+    </select>  
+
+	<!-- 分页查询 -->
+    <select id="selectByPage" parameterType="map" resultType="AdminUser">
+    	select 
+    	<include refid="Base_List" />
+    	from t_adminusers
+ 		   	where isDeleted=false
+	    	limit #{currPage},#{pageSize}
+    </select>
+
+	<!-- 查询总数-->
+    <select id="selectCount" resultType="long">
+    	select 
+    	count(id)
+    	from t_adminusers
+ 		   	where isDeleted=false
+    </select>
+ 
+ 	<!-- 删除管理员用户和角色关联 -->
+ 	<delete id="delAdminUserRole" parameterType="AdminUserRoles">
+ 		delete from t_adminuserroles
+ 			<if test="adminUserId!=null">where adminUserId=#{adminUserId}</if>
+ 			<if test="roleId!=null">where roleId=#{roleId}</if>
+ 	</delete>
+ 
+ 	<!-- 添加管理员用户和角色关联 -->
+	<insert id="addAdminUserRole" parameterType="AdminUserRoles">
+		insert into t_adminuserroles
+			(adminUserId,roleId)
+		values
+			(#{adminUserId},#{roleId})
+	</insert> 
+ 
+	<!-- 查询管理员用户和角色关联 -->
+	<select id="selectAdminUserRole" parameterType="AdminUserRoles" resultType="AdminUserRoles">
+		select adminUserId,roleId
+		from t_adminuserroles
+		<if test="adminUserId!=null">where adminUserId=#{adminUserId}</if>
+ 		<if test="roleId!=null">where roleId=#{roleId}</if>
+	</select> 
+ 
+ 	<!-- 禁用/启用 -->
+ 	<update id="updateDisabled" parameterType="AdminUser">
+ 		update t_adminusers
+    		set isDisabled=#{isDisabled}
+    		where id=#{id} 
+ 	</update>
+ 
+ 	<!-- 根据用户ID查询角色 -->
+ 	<select id="findRoleByUserId" parameterType="Long" resultType="String">
+ 		select DISTINCT r.name
+		from t_adminuserroles a,t_roles r
+		where a.roleId=r.id
+			and a.adminUserId=#{adminUserId}
+ 	</select>
+ 
+ 	<!-- 根据用户ID查询权限 -->
+ 	<select id="findPermissionByUserId" parameterType="Long" resultType="String">
+		SELECT DISTINCT p.permission FROM t_permissions p
+		WHERE p.id IN 
+			(SELECT r.permissionId FROM t_rolePermissions r
+				WHERE EXISTS 
+				(SELECT a.roleId FROM t_adminUserRoles a
+			    	WHERE a.adminUserId = #{adminUserId}))
+ 	</select>
+ 
+ 
+</mapper>
