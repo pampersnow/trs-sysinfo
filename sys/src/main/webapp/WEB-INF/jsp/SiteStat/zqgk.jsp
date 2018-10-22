@@ -9,37 +9,34 @@
 <head>
 <meta charset="utf-8" />
 <title>站群概况</title>
-<script src="${pageContext.request.contextPath }/site/js/echarts.js"></script>
-<script src="${pageContext.request.contextPath }/site/js/theme/macarons.js"></script>
-<script src="${pageContext.request.contextPath }/site/js/jquery-1.7.2.min.js"></script>
+<script src="../site/js/echarts.js"></script>
+<script src="../site/js/theme/macarons.js"></script>
+<script src="../site/js/jquery-1.7.2.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link href="${pageContext.request.contextPath }/site/css/bootstrap.min.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/site/css/bootstrap-responsive.min.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/site/css/font-awesome.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/site/css/adminia.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/site/css/adminia-responsive.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/site/css/pages/dashboard.css" rel="stylesheet" />
+<link href="../site/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../site/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="../site/css/font-awesome.css" rel="stylesheet" />
+<link href="../site/css/adminia.css" rel="stylesheet" />
+<link href="../site/css/adminia-responsive.css" rel="stylesheet" />
+<link href="../site/css/pages/dashboard.css" rel="stylesheet" />
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
-<body>
+<body style="background-color: #ffffff;">
 	<h1 class="page-title">
 		>>当日访问量统计
 	</h1>
 		<div class="container">
-					<!-- <div class="widget"> -->
-						<!-- /widget-header -->
 						<h2 style="float: left; width: 870px;">
-						
 							<a style="cursor: pointer;text-decoration:none;">今日访问量:
 								<span id="sp"></span>
 								<script type="text/javascript">						       						
 									$.ajax({
-										url : '${pageContext.request.contextPath }/siteStat/getEchartsData.do',
+										url : '../siteStat/getEchartsData.do',
 										date : "",
 										type : 'get',
 										dataType : "json",
@@ -55,7 +52,7 @@
 								<span id="sp_1"></span>
 								<script type="text/javascript">						       						
 								$.ajax({
-									url : '${pageContext.request.contextPath }/siteStat/queryNum.do',
+									url : '../siteStat/queryNum.do',
 									date : "",
 									type : 'get',
 									dataType : "json",
@@ -74,7 +71,7 @@
 								var counts = [];
 								var nums = [];
 								$.ajax({
-											url : '${pageContext.request.contextPath }/siteStat/getEchartsData.do',
+											url : '../siteStat/getEchartsData.do',
 											date : "",
 											type : 'get',
 											dataType : "json",
@@ -146,7 +143,7 @@
 												};
 
 												$.ajax({
-															url : '${pageContext.request.contextPath }/siteStat/queryNum.do',
+															url : '../siteStat/queryNum.do',
 															date : "",
 															type : 'get',
 															dataType : "json",
@@ -162,7 +159,7 @@
 							</script>
 						</div>
 
-						<div id="main" style="width: 600px; height: 420px; float: right;">
+						<div id="main" style="width: 620px; height: 420px; float: right;">
 
 							<script type="text/javascript">
 								// 基于准备好的dom，初始化echarts实例
@@ -221,14 +218,29 @@
 										stack : '总量',
 										animation: true, 
 										lineStyle: {normal: {width: 1}}, 
-										data : []
+										data : [],
+										markPoint : {
+					            			data : [ {
+					            				type : 'max',
+					            				name : '最大值'
+					            			}, {
+					            				type : 'min',
+					            				name : '最小值'
+					            			} ]
+					            		},
+					            		markLine : {
+					            			data : [ {
+					            				type : 'average',
+					            				name : '平均值'
+					            			} ]
+					            		}
 									} ]
 								};
 								//myChart.showLoading(); //数据加载完之前先显示一段简单的loading动画
 								var hCounts = [];
 								var hours = [];
 								$.ajax({//使用JQuery内置的Ajax方法
-											url : "${pageContext.request.contextPath }/siteStat/TimeToVisit.do",//请求发送到ZqgkController处
+											url : "../siteStat/TimeToVisit.do",//请求发送到ZqgkController处
 											date : "",
 											type : "get", //get请求方式															
 											dataType : "json", //返回数据形式为json
@@ -268,13 +280,13 @@
 	<!-- Le javascript
 ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/excanvas.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/jquery.flot.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/jquery.flot.pie.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/jquery.flot.orderBars.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/jquery.flot.resize.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/bootstrap.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/site/js/charts/bar.js"></script>
+	<script type="text/javascript" src="../site/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../site/js/excanvas.min.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.pie.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.orderBars.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.resize.js"></script>
+	<script type="text/javascript" src="../site/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../site/js/charts/bar.js"></script>
 </body>
 </html>

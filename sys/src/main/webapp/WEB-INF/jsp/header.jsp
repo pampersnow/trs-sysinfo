@@ -3,6 +3,7 @@
 <%@include file="/WEB-INF/jsp/showMessage.jsp" %> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page  isELIgnored="false"%>
 <%String ctxPath = request.getContextPath(); %> <!-- 设置一个变量，获取页面加载路径 -->
 <meta charset="UTF-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">

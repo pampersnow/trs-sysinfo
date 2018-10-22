@@ -177,8 +177,7 @@
 					<artifactId>jsp-api</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
+		</dependency> 
 
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -250,5 +249,8 @@
 			</plugin>
 		</plugins>
 	</build>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
 </project>

@@ -7,12 +7,12 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <link href="<%=ctxPath %>/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
        
-<title>TRS内网信息统计平台</title>
+<title>内网访客统计平台</title>
 
 </head>
 <body>
 <header class="Hui-header cl"> 
-    <a class="Hui-logo l" title="TRS内网信息统计平台">TRS内网信息统计平台</a> 
+    <a class="Hui-logo l" title="内网访客统计平台内网信息统计平台">内网访客统计平台</a> 
 	<ul class="Hui-userbar">
 		<li><i class="Hui-iconfont">&#xe625;</i><a href="<%=ctxPath%>/">首页</a></li>
 		<li class="dropDown dropDown_hover"><a class="dropDown_A"><span><shiro:principal/></span> <i class="Hui-iconfont">&#xe6d5;</i></a>
@@ -41,22 +41,31 @@
                 <dd>
                     <ul>
                     	<li><a _href="<%=ctxPath %>/siteStat/zqgk.do" href="javascript:void(0)">站群概况</a></li>
-                    	<li><a _href="<%=ctxPath %>/siteStat/qsfx.do" href="javascript:void(0)">趋势分析 </a></li>                    
+                    	<li><a _href="<%=ctxPath %>/siteStat/qsfx.do" href="javascript:void(0)">趋势分析 </a></li>
+                    	<li><a _href="<%=ctxPath %>/siteStat/articlestat.do" href="javascript:void(0)">文章推送</a></li>                    
                     </ul>
                 </dd>
             </dl>
             
             <dl id="menu-comments">
-                <dt><i class="Hui-iconfont">&#xe60d;</i> 实时访问<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dt><i class="Hui-iconfont">&#xe66d;</i> 实时访问<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>
-                    	<li><a _href="<%=ctxPath %>/adminUser/list.do" href="javascript:void(0)">访客列表</a></li>
-                    	<li><a _href="<%=ctxPath %>/adminUser/list.do" href="javascript:void(0)">热点栏目 </a></li>   
-                    	<li><a _href="<%=ctxPath %>/adminUser/list.do" href="javascript:void(0)">热点文章 </a></li>                  
+                    	<li><a _href="<%=ctxPath %>/liveHits/VisitorList.do" href="javascript:void(0)">访客列表</a></li>               
+                    	<li><a _href="<%=ctxPath %>/liveHits/articlepush.do" href="javascript:void(0)">推送列表</a></li>               
                     </ul>
                 </dd>
             </dl>
             
+           <dl id="menu-comments">
+                <dt><i class="Hui-iconfont">&#xe64d;</i> 热点访问<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                    	<li><a _href="<%=ctxPath %>/hotHits/hotsection.do" href="javascript:void(0)">热点栏目 </a></li>   
+                    	<li><a _href="<%=ctxPath %>/hotHits/hotarticle.do" href="javascript:void(0)">热点文章 </a></li>                  
+                    </ul>
+                </dd>
+            </dl>
         	<shiro:hasPermission name="admin">
             <dl id="menu-comments">
                 <dt><i class="Hui-iconfont">&#xe62e;</i> 权限管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
@@ -80,7 +89,7 @@
                 <dt><i class="Hui-iconfont">&#xe63c;</i> 关于系统<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>       
-                    <li><a _href="<%=ctxPath %>/adminUser/list.do" href="javascript:void(0)">关于我们</a></li>      
+                    <li><a _href="<%=ctxPath %>/AboutUs.do" href="javascript:void(0)">关于我们</a></li>      
                     </ul>
                 </dd>
             </dl>

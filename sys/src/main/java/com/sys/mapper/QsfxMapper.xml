@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.mapper.QsfxMapper">
+
+	<select id="selectDuringTheMonth" resultType="Qsfx">
+		SELECT COUNT(*) as
+		monthsCount
+		FROM zlvisitdata WHERE DATE_FORMAT( accesstime, '%Y%m' ) =
+		DATE_FORMAT( CURDATE( ) , '%Y%m' )
+	</select>
+
+	<select id="selectInTheQuarter" resultType="Qsfx">
+		SELECT COUNT(*) as
+		seasonCount FROM
+		zlvisitdata WHERE QUARTER(accesstime)=QUARTER(NOW())
+	</select>
+
+	<select id="selectThatYear" resultType="Qsfx">
+		SELECT COUNT(*) as
+		yearCount FROM
+		zlvisitdata WHERE YEAR(accesstime)=YEAR(NOW())
+	</select>
+
+	<select id="selectTimeVisitorsCount" resultType="Qsfx">
+		SELECT SUBSTR(accesstime,1,10) AS dayPeriod, COUNT(*)AS monthCount FROM
+		zlvisitdata
+		WHERE DATE_FORMAT(accesstime,'%Y-%m-%d') GROUP BY SUBSTR(accesstime,1,10)
+	</select>
+</mapper>

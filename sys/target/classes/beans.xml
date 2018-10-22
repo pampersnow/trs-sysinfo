@@ -23,8 +23,8 @@
         <property name="user" value="root"/>  
         <property name="password" value="1234"/>  
         <property name="maxPoolSize" value="100"/>  
-        <property name="minPoolSize" value="10"/>  
-        <property name="maxIdleTime" value="60"/>  
+        <property name="minPoolSize" value="3"/>  
+        <property name="maxIdleTime" value="10"/>  
     </bean>
     
     <!-- mybatis 的 sqlSessionFactory -->

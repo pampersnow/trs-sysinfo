@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.mapper.HotHitsMapper">
+
+	<select id="selectRdlm" resultType="Rdlm">
+		SELECT siteid,pageid,`type`,
+		COUNT( * ) AS `count`
+		FROM zlvisitdata
+		GROUP BY `type`
+		ORDER BY `count`
+		DESC
+		LIMIT 10
+	</select>
+
+	<select id="selectRdlmAsc" resultType="Rdlm">
+		SELECT
+		siteid,pageid,`type`,
+		COUNT( * ) AS `count`
+		FROM zlvisitdata
+		GROUP BY
+		`type`
+		ORDER BY `count` ASC
+		LIMIT 10
+	</select>
+
+	<select id="selectRdlmByTimeAll" resultType="Rdlm"
+		parameterType="Date">
+		SELECT siteid,pageid,`type`,
+		COUNT(*) AS `count` FROM zlvisitdata
+		<where>
+			<if test="startTime!=null and startTime!=''">
+    			<![CDATA[  and DATE_FORMAT(accesstime, '%Y-%m-%d')>=  DATE_FORMAT(#{startTime}, '%Y-%m-%d')   ]]>
+			</if>
+			<if test="endTime!=null and endTime!=''">
+    			<![CDATA[  and DATE_FORMAT(accesstime, '%Y-%m-%d') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d')    ]]>
+			</if>
+		</where>
+		GROUP BY `type`
+		ORDER BY `count` DESC
+		LIMIT 10
+	</select>
+
+	<select id="showRdwzInfo" resultType="Rdwz">
+		SELECT siteid,
+		title,articleid,WriteTime,
+		COUNT( * ) AS `COUNT`
+		FROM zlvisitdata
+		GROUP
+		BY `title`
+		ORDER BY `COUNT`
+		DESC
+		LIMIT 10
+	</select>
+
+	<select id="showRdwzInfoASC" resultType="Rdwz">
+		SELECT siteid,
+		title,articleid,WriteTime,
+		COUNT( * ) AS `COUNT`
+		FROM zlvisitdata
+		GROUP
+		BY `title`
+		ORDER BY `COUNT`
+		ASC
+		LIMIT 10
+	</select>
+
+	<select id="selectRdwzByTimeAll" resultType="Rdwz"
+		parameterType="Date">
+		SELECT siteid, title,articleid,WriteTime,
+		COUNT(*) AS `count` FROM
+		zlvisitdata
+		<where>
+			<if test="startTime!=null and startTime!=''">
+    			<![CDATA[  and DATE_FORMAT(accesstime, '%Y-%m-%d')>=  DATE_FORMAT(#{startTime}, '%Y-%m-%d')   ]]>
+			</if>
+			<if test="endTime!=null and endTime!=''">
+    			<![CDATA[  and DATE_FORMAT(accesstime, '%Y-%m-%d') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d')    ]]>
+			</if>
+		</where>
+		GROUP BY `type`,`title`
+		ORDER BY `count` DESC
+		LIMIT 10
+	</select>
+</mapper>

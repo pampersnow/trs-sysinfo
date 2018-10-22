@@ -4,188 +4,38 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="utf-8" />
 <title>趋势分析</title>
-<script src="${pageContext.request.contextPath }/site/js/echarts.js"></script>
-<script src="${pageContext.request.contextPath }/site/js/theme/macarons.js"></script>
-<script
-	src="${pageContext.request.contextPath }/site/js/jquery-1.7.2.min.js"></script>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<script src="../site/js/echarts.js"></script>
+<script src="../site/js/theme/macarons.js"></script>
+<script src="../site/js/jquery-1.7.2.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-
-<link
-	href="${pageContext.request.contextPath }/site/css/bootstrap.min.css"
-	rel="stylesheet" />
-<link
-	href="${pageContext.request.contextPath }/site/css/bootstrap-responsive.min.css"
-	rel="stylesheet" />
-
-<link
-	href="${pageContext.request.contextPath }/site/css/font-awesome.css"
-	rel="stylesheet" />
-
-<link href="${pageContext.request.contextPath }/site/css/adminia.css"
-	rel="stylesheet" />
-<link
-	href="${pageContext.request.contextPath }/site/css/adminia-responsive.css"
-	rel="stylesheet" />
-
-<link
-	href="${pageContext.request.contextPath }/site/css/pages/dashboard.css"
-	rel="stylesheet" />
-
+<link href="../site/css/bootstrap.min.css" rel="stylesheet" />
+<link href="../site/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<link href="../site/css/font-awesome.css" rel="stylesheet" />
+<link href="../site/css/adminia.css" rel="stylesheet" />
+<link href="../site/css/adminia-responsive.css" rel="stylesheet" />
+<link href="../site/css/pages/dashboard.css" rel="stylesheet" />
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
-
 <body>
-
-	<div class="navbar navbar-fixed-top">
-
-		<div class="navbar-inner">
-
-			<div class="container">
-
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="./"></a>
-
-				<div class="nav-collapse">
-
-					<ul class="nav pull-right">
-						<li class="divider-vertical"></li>
-
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle " href="#"></a></li>
-					</ul>
-
-				</div>
-				<!-- /nav-collapse -->
-
-			</div>
-			<!-- /container -->
-
-		</div>
-		<!-- /navbar-inner -->
-
-	</div>
-	<!-- /navbar -->
-
-	<div class="copyrights"></div>
-
-	<div id="content">
-
-		<div class="container">
-
-			<div class="row">
-
-				<div class="span3">
-
-					<div class="account-container">
-
-						<div class="account-avatar">
-							<img src="${pageContext.request.contextPath }/site/img/cat.png"
-								alt="" class="thumbnail" />
-						</div>
-						<!-- /account-avatar -->
-
-						<div class="account-details">
-							<h3>当前登录用户名：</h3>
-							<span class="account-name">${userSession.username}</span> 
-						</div>
-						<!-- /account-details -->
-
-					</div>
-					<!-- /account-container -->
-
-					<hr />
-
-					<ul id="main-nav" class="nav nav-tabs nav-stacked">
-						<li><a href="${pageContext.request.contextPath }/sys/2100/dozqgk.html"><i
-								class="icon-home"></i>站群概况 </a></li>
-						<li><a href="${pageContext.request.contextPath }/sys/2370/doqsfx.html"><i
-								class="icon-user"></i>趋势分析 </a></li>
-						<li><a
-							href="${pageContext.request.contextPath }/sys/2441/dofklb.html"><i
-								class="icon-user"></i>访客列表 </a></li>
-						<li><a href="${pageContext.request.contextPath }/sys/2850/dordlm.html">
-								<i class="icon-user"></i> 热点栏目
-						</a></li>
-						<li><a href="${pageContext.request.contextPath }/sys/2042/dordwz.html">
-								<i class="icon-user"></i> 热点文章
-						</a></li>
-					</ul>
-
-					<hr />
-					<br />
-					<div class="sidebar-extra">
-						<%
-							Calendar rightNow = Calendar.getInstance();
-							SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-						%>
-						<script type="text/javascript">
-							//从服务器上获取初始时间 
-							var currentDate = new Date(
-						<%=new java.util.Date().getTime()%>
-							);
-							function run() {
-								currentDate
-										.setSeconds(currentDate.getSeconds() + 1);
-								var time = "";
-								var year = currentDate.getFullYear();
-								var month = currentDate.getMonth() + 1;
-								var day = currentDate.getDate();
-								var hour = currentDate.getHours();
-								var minute = currentDate.getMinutes();
-								var second = currentDate.getSeconds();
-								if (hour < 10) {
-									time += "0" + hour;
-								} else {
-									time += hour;
-								}
-								time += ":";
-								if (minute < 10) {
-									time += "0" + minute;
-								} else {
-									time += minute;
-								}
-								time += ":";
-								if (second < 10) {
-									time += "0" + second;
-								} else {
-									time += second;
-								}
-								document.getElementById("dt").innerHTML = year
-										+ "年" + month + "月" + day + "日" + time;
-							}
-							window.setInterval("run();", 1000);
-						</script>
-						<h2 id="dt">当前时间：</h2>
-					</div>
-					<!-- .sidebar-extra -->
-				</div>
-				<!-- /span3 -->
-
-				<div class="span9">
-
-					<h1 class="page-title">
-						<i class="icon-home"></i>趋势分析
-					</h1>
+    <h1 class="page-title">
+		>>趋势分析
+	</h1>
+	<div class="container">
 					<div class="widget">
 						<h3 style="float:left; width: 870px;">
 							<a style="cursor: pointer;text-decoration:none;">当月:
 								<span id="month"></span>
 								<script type="text/javascript">						       						
 									$.ajax({
-										url : '${pageContext.request.contextPath }/sys/2370/doDuringTheMonth.html',
+										url : '../siteStat/doDuringTheMonth.do',
 										date : "",
 										type : 'get',
 										dataType : "json",
@@ -202,7 +52,7 @@
 							<span id="season"></span>
 								<script type="text/javascript">						       						
 									$.ajax({
-										url : '${pageContext.request.contextPath }/sys/2370/doInTheQuarter.html',
+										url : '../siteStat/doInTheQuarter.do',
 										date : "",
 										type : 'get',
 										dataType : "json",
@@ -218,7 +68,7 @@
 								<span id="year"></span>
 								<script type="text/javascript">						       						
 									$.ajax({
-										url : '${pageContext.request.contextPath }/sys/2370/doThatYear.html',
+										url : '../siteStat/doThatYear.do',
 										date : "",
 										type : 'get',
 										dataType : "json",
@@ -238,7 +88,7 @@
 							var seasonCounts=[];
 							var yearCounts=[];
 							$.ajax({
-								url : '${pageContext.request.contextPath }/sys/2370/doDuringTheMonth.html',
+								url : '../siteStat/doDuringTheMonth.do',
 								date : "",
 								type : 'get',
 								dataType : "json",
@@ -300,7 +150,7 @@
 										    ]
 										};
 									$.ajax({
-										url : '${pageContext.request.contextPath }/sys/2370/doInTheQuarter.html',
+										url : '../siteStat/doInTheQuarter.do',
 										date : "",
 										type : 'get',
 										dataType : "json",
@@ -309,7 +159,7 @@
 										success : function(data) {
 											seasonCounts.push(data.seasonCount);
 										$.ajax({
-												url : '${pageContext.request.contextPath }/sys/2370/doThatYear.html',
+												url : '../siteStat/doThatYear.do',
 												date : "",
 												type : 'get',
 												dataType : "json",
@@ -328,7 +178,7 @@
 						</div>
 
 
-						<div id="main" style="width: 570px; height: 400px; float:right;">
+						<div id="main" style="width: 635px; height: 400px; float:right;">
 							<script type="text/javascript">
 								// 基于准备好的dom，初始化echarts实例
 								var myChart = echarts.init(document.getElementById('main'),'macarons');
@@ -409,14 +259,29 @@
 						                        animation: true, 
 						                        symbol : 'emptycircle',
 						                     lineStyle: {normal: {width: 1}},  
-						                     data:[]  
+						                     data:[],
+						             		markPoint : {
+						            			data : [ {
+						            				type : 'max',
+						            				name : '最大值'
+						            			}, {
+						            				type : 'min',
+						            				name : '最小值'
+						            			} ]
+						            		},
+						            		markLine : {
+						            			data : [ {
+						            				type : 'average',
+						            				name : '平均值'
+						            			} ]
+						            		}
 						                    }  
 						                ]  
 						            };  
 								var monthCounts = [];
 								var dayPeriods = [];
 								$.ajax({//使用JQuery内置的Ajax方法
-									url : "${pageContext.request.contextPath }/sys/2370/doTimeVisitorsCount.html",//请求发送到ZqgkController处
+									url : "../siteStat/doTimeVisitorsCount.do",//请求发送到ZqgkController处
 									date : "",
 									type : "get", //get请求方式															
 									dataType : "json", //返回数据形式为json
@@ -447,42 +312,20 @@
 							<span style="font-style: italic; color: red; float: ">
 							请通过以上时间轴选择时间段访客量浏览（支持鼠标悬停折线图滚动）</span>
 						</div>
-
-
 					</div>
 					<!-- /widget -->
-
-				</div>
-				<!-- /span9 -->
-
-			</div>
-			<!-- /row -->
-
 		</div>
 		<!-- /container -->
-
-	</div>
-	<!-- /content -->
 	<!-- Le javascript
 ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/excanvas.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/jquery.flot.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/jquery.flot.pie.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/jquery.flot.orderBars.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/jquery.flot.resize.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/bootstrap.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/site/js/charts/bar.js"></script>
-
+	<script type="text/javascript" src="../site/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="../site/js/excanvas.min.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.pie.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.orderBars.js"></script>
+	<script type="text/javascript" src="../site/js/jquery.flot.resize.js"></script>
+	<script type="text/javascript" src="../site/js/bootstrap.js"></script>
+	<script type="text/javascript" src="../site/js/charts/bar.js"></script>
 </body>
-
 </html>
