@@ -52,14 +52,40 @@
     </script>
 <title>管理员用户列表</title>
 </head>
+<script type="text/javascript">
+//搜索
+function sub(){		
+	//获取被选中的option标签
+    var datemin = $("#datemin").val();
+    var datemax = $("#datemax").val();
+	//console.info("start:"+start);
+	$.ajax({
+		url: "<%=ctxPath%>/liveHits/doByTime.do",
+	    type: "GET",
+		dataType: "text",
+		//把获取到的value值传给服务器
+		data: {"startTime": datemin,"endTime":datemax},
+		success: function(data) {
+			if (data!=null && data.length>0){
+				var json = eval('(' + data + ')');
+				alert("数据："+json)
+				//console.info($("#tab"));
+			}
+		},
+		error:function(){
+			console.info("error");
+		}
+	});
+}
+</script>
 <body>
 <br>
  <div class="text-c" style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期范围：
-    <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name="datemin" class="input-text Wdate" style="width:120px;">
+    <input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" name="startTime" class="input-text Wdate" style="width:120px;">
     -
-    <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" name="datemax" class="input-text Wdate" style="width:120px;">    
+    <input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" name="endTime" class="input-text Wdate" style="width:120px;">    
     <input type="text" class="input-text" style="width:100px" placeholder="模糊查询" id="state" name="state">
-    <button type="submit" class="btn btn-success radius" id="" name="" ><i class="icon-search"></i>检索GO</button>
+    <button type="submit" class="btn btn-success radius" id="" name="" onclick="sub()"><i class="icon-search"></i>检索GO</button>
     <button type="button" class="btn btn-primary  radius" id="reset" name="reset" ><i class="icon-search"></i> 重置</button>
   </div>
   	<div class="fl-r" id="export" style="float: right;">

@@ -30,3 +30,4 @@
 <script type="text/javascript" src="<%=ctxPath %>/js/H-ui.js"></script> 
 <script type="text/javascript" src="<%=ctxPath %>/js/H-ui.admin.js"></script> 
 <script type="text/javascript" src="<%=ctxPath %>/js/common.js"></script>
+<script type="text/javascript" src="<%=ctxPath %>/js/time.js"></script>

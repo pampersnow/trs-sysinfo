@@ -192,28 +192,16 @@
 						                grid: {  
 						                    bottom: 80  
 						                },  
-						                toolbox: {  
-						                	show : true,
-											feature : {
-												mark : {
-													show : true
-												},
-												dataView : {
-													show : true,
-													readOnly : false
-												},
-												magicType : {
-													show : true,
-													type : [ 'line', 'bar' ]
-												},
-												restore : {
-													show : true
-												},
-												saveAsImage : {
-													show : true
-												}
-											}
-						                },  
+						                toolbox: {
+									        show : true,
+									        feature : {
+									            mark : {show: true},
+									            dataView : {show: true, readOnly: false},
+									            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+									            restore : {show: true},
+									            saveAsImage : {show: true}
+									        }
+									    },  
 						                tooltip : {  
 						                    trigger: 'axis',  
 						                    axisPointer: {  

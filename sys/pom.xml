@@ -82,11 +82,11 @@
 			<version>5.1.37</version>
 		</dependency>
 
-		<!-- c3p0依赖 -->
+		<!-- dbcp依赖 -->
 		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5</version>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
 		</dependency>
 
 		<!-- 谷歌gson依赖 -->
@@ -177,7 +177,7 @@
 					<artifactId>jsp-api</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency> 
+		</dependency>
 
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
@@ -249,8 +249,8 @@
 			</plugin>
 		</plugins>
 	</build>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 </project>

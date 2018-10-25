@@ -5,16 +5,15 @@
 <head>
 <%@include file="/WEB-INF/jsp/header.jsp" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<link href="<%=ctxPath %>/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
-       
+<link href="<%=ctxPath %>/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />     
 <title>内网访客统计平台</title>
-
 </head>
 <body>
 <header class="Hui-header cl"> 
-    <a class="Hui-logo l" title="内网访客统计平台内网信息统计平台">内网访客统计平台</a> 
+    <a class="Hui-logo l" title="内网访客统计平台内网信息统计平台">内网访客统计平台</a>     
 	<ul class="Hui-userbar">
-		<li><i class="Hui-iconfont">&#xe625;</i><a href="<%=ctxPath%>/">首页</a></li>
+		<li id="_timer" class="Hui-iconfont">正在获取时间...</li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="Hui-iconfont">&#xe625;</i><a href="<%=ctxPath%>/">首页</a></li>
 		<li class="dropDown dropDown_hover"><a class="dropDown_A"><span><shiro:principal/></span> <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="logout.do">退出</a></li>
