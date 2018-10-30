@@ -91,7 +91,7 @@
 				    			layer.msg(result.message);
 				    			setTimeout(function(){
 				    				//登录返回
-					    			window.location.href= result.back_url || "/sys/";
+					    			window.location.href= result.back_url || "/sysinfo/";
 				    			},1000) 
 				    		}
 			        	},

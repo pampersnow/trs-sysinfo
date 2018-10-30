@@ -15,78 +15,66 @@
 <script src="<%=ctxPath %>/site/js/echarts.js"></script>
 <script src="<%=ctxPath %>/site/js/theme/macarons.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
-    <script type="text/javascript">
-		       $(document).ready(function(){
-		            $.ajax({
-		                contentType : "application/json;charset=utf-8",
-		                type : "POST",
-		                url : "index/siteinfo.do",
-		                dataType : "json",
-		                success : function(data) {
-		                        alert("ss");
-		                    $.each(data, function(i, city) {
-		                        $('#siteinfo').append(
-		                                $('<option>').text(list.sitename).attr('value',
-		                                        list.sitename));
-
-		                    });
-		                }
-		            });
-		        });
-			</script>
 <title>管理员用户列表</title>
 </head>
-<body>	
+<body onload="init()">
+<script type="text/javascript">
+</script>	
 <div class="pd-20">
-		<div class="col-xs-6" style="float: right;">
-		<span class="select-box" style="float: right; width: 120px;">
-			<select id="siteinfo" class="select" size="1" name="lmfcount">
-				<option value="1" selected >请选择站点</option>
-				<option value="2">国家教育部</option>
-				<option value="3">中共中联部</option>
-			</select>		
-		</span>
-	</div>
-
 <div class="container">	
-	<h2 style="color: #64849b;"><img alt="" src="<%=ctxPath %>/images/tjs.png">&nbsp;中共联络部</h2>
-	<div class="row clearfix">
+<div class="row clearfix">	
 		<div class="col-md-4 column">
-			<h2>
-				域名
-			</h2>
-			<p>
-				www.moe.gov.cn
+			<h4 style="color:#DC143C;">
+				今日热点文章
+			</h4>
+			<p style="color:#BA55D3;">
+				<tbody>
+					<tr >						
+						<li limit="12"> 习近平会见四川航空“中国民航英雄机组”全体成员</li>
+						<li limit="12"> 中国共产党民航华北地区管理局第二次代表大会召开</li>
+						<li limit="12"> 全国民航冬春航季航班计划将于28日起执行</li>
+					</tr>
+				</tbody>
 			</p>
 			<p>
-				 <a href="#">点击更多 >></a>
+				 <a href="<%=ctxPath %>/hotHits/hotarticle.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
-		</div>
+		</div>	
 		<div class="col-md-4 column">
-			<h2>
+			<h2 style="color:#DC143C;">
 				今日浏览量
 			</h2>
-			<p>
-				346547980
+			<p style="color:#BA55D3; font-size:18px;">
+				3390
 			</p>
 			<p>
-				 <a href="#">点击更多 >></a>
+				 <a href="<%=ctxPath %>/siteStat/zqgk.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
 		</div>
+		
 		<div class="col-md-4 column">
-			<h2>
-				总浏览量
-			</h2>
+		<form action="" method=post name="creator" enctype="multipart/form-data">
+			<div class="col-xs-6" style="float: right;">
+			<span class="select-box" style="float: right; width: 120px;">
+				<select class="select" size="1" name="province" onChange="select()" style="font-size:16px;color: #1E90FF">	
+					<option>请选择站点</option>
+					<option>民航局内网</option>	
+					<option>中联部内网</option>	
+					<option>档案局内网</option>				
+				</select>				
+			</span>
+		</div>
+	</form>			
+			<img alt="" src="<%=ctxPath %>/images/tjs.png">&nbsp;
+	 	<input readonly="readonly" type=text name="" maxlength=12 
+	 			size=22 style="font-size:25px; color: #64849b; border: 0px; font-weight: bold;" value="民航内网">
 			<p>
-				769435247
-			</p>
-			<p>
-				 <a href="#">点击更多 >></a>
+				 <a href="<%=ctxPath %>/adminsite/list.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
 		</div>
 	</div>
 </div>
-	<div id="mai" style="width: 100%; height: 420px; float: left;">
+	<div id="mai" style="width: 100%; height: 435px; float: left;">
 		<script type="text/javascript">								
 			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('mai'),'macarons');												
@@ -109,21 +97,21 @@
 				        data:['火狐','360','IE','搜狗','UC','谷歌','其他']
 				    },
 				    xAxis : [
-				        {
+				        {	name :'访问来源',
 				            type : 'category',
 				            splitLine : {show : false},
 				            data : ['火狐','360','IE','搜狗','UC','谷歌','其他']
 				        }
 				    ],
 				    yAxis : [
-				        {
+				        {	name :'浏览数',
 				            type : 'value',
-				            position: 'right'
+				            position: 'left'
 				        }
 				    ],
 				    series : [				        
 				        {
-				            name:'访问来源',
+				            name:'访问量',
 				            type:'line',
 				            data:[862, 1018, 964, 1026, 1679, 1600, 1570],
 							markPoint : {
@@ -142,46 +130,15 @@
 		            			} ]
 		            		}
 				        },
-
-				        {
-				            name:'浏览器',
-				            type:'pie',
-				            tooltip : {
-				                trigger: 'item',
-				                formatter: '{a} <br/>{b} : {c} ({d}%)'
-				            },
-				            center: [160,130],
-				            radius : [0, 50],
-				            itemStyle :{
-				                normal : {
-				                    labelLine : {
-				                        length : 20
-				                    }
-				                }
-				            },
-				            data:[
-
-								{value:1048, name:'火狐'},
-								{value:764, name:'360'},
-								{value:308, name:'IE'},
-								{value:548, name:'搜狗'},
-				                {value:438, name:'UC'},
-				                {value:251, name:'谷歌'},
-				                {value:102, name:'其他'}
-				            ]
-				        }
 				        
 				    ]
 				};				                                        																				
 			myChart.setOption(option, true);
 		</script>
 	</div>
-	<div id="main" style="width: 300px; height: 400px; float: right;"></div>
-
-  <%--   <jsp:include page="/WEB-INF/jsp/page.jsp" flush="true"/> --%>
 </div>          
           <!-- 修改管理员用户 -->  
-          <div id="updatePassword" >
+          <!-- <div id="updatePassword" >
 			    <form action="" class="form form-horizontal" method="post">
 			    	<input type="hidden" name="id"  id="userID"/>
 			        <div class="row cl">
@@ -211,7 +168,7 @@
 			            </div>
 			        </div>
 			    </form>
-		</div>             
+		</div>              -->
 <script type="text/javascript" src="<%=ctxPath %>/js/adminUser.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/excanvas.min.js"></script>
@@ -221,5 +178,38 @@
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/jquery.flot.resize.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/charts/bar.js"></script>
+<script type="text/javascript">
+    
+    var limit=[];
+    var Text=[];
+    var Pox=document.getElementsByTagName('*');//不要*自己改什么节点下的XXX
+    for(var i=0;i<Pox.length;i++){
+        if(Pox[i].getAttribute("limit")){
+            limit[i]=Pox[i].getAttribute("limit");
+            Text[i]=Pox[i].innerHTML;
+            if(limit[i]<Text[i].length){
+                Pox[i].innerHTML=Text[i].substring(0,limit[i])+"...";
+            }
+        }
+    }  
+    
+		       $(document).ready(function(){
+		            $.ajax({
+		                contentType : "application/json;charset=utf-8",
+		                type : "POST",
+		                url : "index/siteinfo.do",
+		                dataType : "json",
+		                success : function(data) {
+		                        alert("ss");
+		                    $.each(data, function(i, city) {
+		                        $('#siteinfo').append(
+		                                $('<option>').text(list.sitename).attr('value',
+		                                        list.sitename));
+
+		                    });
+		                }
+		            });
+		        });					
+</script>
 </body>
 </html>

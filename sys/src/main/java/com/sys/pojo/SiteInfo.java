@@ -1,9 +1,46 @@
 package com.sys.pojo;
 
+import java.util.Date;
+
 public class SiteInfo {
 	private int id;
 	private int siteid;
 	private String sitename;
+	private String	siteurl;                            
+	private Date	addjstime;  
+	private String	createname;                      
+	private Date	createtime;                           
+	public String getSiteurl() {
+		return siteurl;
+	}
+	public void setSiteurl(String siteurl) {
+		this.siteurl = siteurl;
+	}
+	public Date getAddjstime() {
+		return addjstime;
+	}
+	public void setAddjstime(Date addjstime) {
+		this.addjstime = addjstime;
+	}
+	public String getCreatename() {
+		return createname;
+	}
+	public void setCreatename(String createname) {
+		this.createname = createname;
+	}
+	public Date getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+	public int getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	private int	isDeleted; 
 	public int getId() {
 		return id;
 	}
