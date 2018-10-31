@@ -1,7 +1,14 @@
 package com.sys.pojo;
 
 import java.util.Date;
-
+/**
+* Copyright (C) Beijing TRS information technology co. LTD.In 
+* @ClassName: SiteInfo  
+* @Description: 站点管理实体类
+* @author JYB  
+* @date 2018年9月22日上午9:00:12  
+* @version 1.00
+*/
 public class SiteInfo {
 	private int id;
 	private int siteid;

@@ -3,10 +3,10 @@ package com.sys.pojo;
 import java.util.Date;
 
 /**
- * @author JYB
- *创建日期：2018-05-16
- *创建时间：下午 1:30
- *实体类说明：热点栏目	字段封装	
+ * @author JYB 
+ * 创建日期：2018-06-1 
+ * 创建时间：09:20 
+ * 实体类说明：热点栏目 字段封装
  */
 public class Rdlm {
 

@@ -9,7 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sys.pojo.SiteInfo;
 import com.sys.service.SiteInfoService;
-
+/**  
+* @ClassName: AdminUserController  
+* @Description: 站点管理
+* @author JYB
+* @Date 2018年9月22日上午10:36:03
+* @version 1.00
+*/
 @RequestMapping("adminsite")
 @Controller
 public class AdminSiteController {
