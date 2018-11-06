@@ -36,7 +36,7 @@
             
         </tbody>
     </table>
-    <jsp:include page="/WEB-INF/jsp/page.jsp" flush="true"/>
+   	<%@include file="/WEB-INF/jsp/page.jsp" %>
 </div>
 
 <!-- 修改权限 -->

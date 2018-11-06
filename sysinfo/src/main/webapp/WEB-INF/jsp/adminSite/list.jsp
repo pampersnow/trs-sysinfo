@@ -61,8 +61,8 @@
              </c:forEach>  
 
         </tbody>
-    </table><%-- 
-    <jsp:include page="/WEB-INF/jsp/page.jsp" flush="true"/> --%>
+    </table>
+    <%@include file="/WEB-INF/jsp/page.jsp" %>
 </div>      
 </body>
 </html>

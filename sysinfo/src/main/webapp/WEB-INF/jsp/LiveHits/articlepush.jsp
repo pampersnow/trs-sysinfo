@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
  <script>
  window.onload = function () {
-     tableToExcel('tableToExcel', '热点文章')
+     tableToExcel('tableToExcel', '热点推送文章')
  };
  //base64转码
  var base64 = function (s) {
@@ -50,7 +50,7 @@
  }
 
     </script>
-<title>管理员用户列表</title>
+<title>推送列表</title>
 </head>
 <body>
 <br>
@@ -77,7 +77,7 @@
 	</div>
 	<div class="fl-r" id="export" style="float: right;">
        <button id="btn" type="button" class="btn btn-default btn-primary" id="exportBtn">
-         <a class="glyphicon glyphicon-export" aria-hidden="true" download="热点文章" id="excelOut" href="#" style="color: white;">导出报表</a>
+         <a class="glyphicon glyphicon-export" aria-hidden="true" download="热点推送文章" id="excelOut" href="#" style="color: white;">导出报表</a>
        </button>
        &nbsp;&nbsp;&nbsp;&nbsp;
     </div>
@@ -87,29 +87,40 @@
     <table cellspacing="0" cellpadding="0"  id="tableToExcel" class="table table-border table-bordered table-bg table-hover">
         <thead>
             <tr>
-				<th>文章ID</th>
-				<th>文章标题</th>
-				<th>文章撰写时间</th>
-				<th>来源站点</th>
-				<th>来源栏目</th>
-				<th>点击量</th>
+            	<th>站点ID</th>
+				<th>站点名称</th>
+				<th>来源栏目ID</th>
+				<th>来源栏目名称</th>
+				<th>文档ID</th>
+				<th>文档名称</th>
+				<th>责任编辑</th>
+				<th>撰写时间</th>
+				<th>发布时间</th>
+				<th>访问量</th>
+				<th>访文档分数</th>
             </tr>
         </thead>
         <tbody>
-			<%-- <c:forEach var="li" items="${rdwzList }" >
+			<c:forEach var="li" items="${doclist }" >
 				<tbody>
 					<tr >
-						<td class="teble-style">${li.siteid}</td>
+						<td class="teble-style">${li.sourcesiteid}</td>
+						<td class="teble-style">${li.sourcesite	}</td>
+						<td class="teble-style">${li.sourcepageid}</td>						
+						<td class="teble-style">${li.sourcepage}</td>
 						<td class="teble-style">${li.articleid}</td>
 						<td class="teble-style">${li.title}</td>
+						<td class="teble-style">${li.editorcharge}</td>
 						<td class="teble-style"><fmt:formatDate value="${li.writetime}" pattern="yyyy-MM-dd" /></td>
-						<td class="teble-style">${li.count}</td>
+						<td class="teble-style"><fmt:formatDate value="${li.pubtime}" pattern="yyyy-MM-dd" /></td>
+						<td class="teble-style">${li.doccount}</td>
+						<td class="teble-style">${li.score}</td>
 					</tr>
 				</tbody>
-			</c:forEach>   --%>
+			</c:forEach>   
         </tbody>
     </table>
-  <%--   <jsp:include page="/WEB-INF/jsp/page.jsp" flush="true"/> --%>
+  <%@include file="/WEB-INF/jsp/page.jsp" %>
 </div>
           
           <!-- 修改管理员用户 -->  

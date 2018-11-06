@@ -16,7 +16,7 @@
 		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="Hui-iconfont">&#xe625;</i><a href="<%=ctxPath%>/">首页</a></li>
 		<li class="dropDown dropDown_hover"><a class="dropDown_A"><span><shiro:principal/></span> <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
-				<li><a href="logout.do">修改密码</a></li>
+				<li><a href="#">修改密码</a></li>
 				<li><a href="logout.do">退出</a></li>
 			</ul>
 		</li>
@@ -40,9 +40,9 @@
                 <dt><i class="Hui-iconfont">&#xe60d;</i> 站点统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>
-                    	<li><a _href="<%=ctxPath %>/siteStat/zqgk.do" href="javascript:void(0)">站群概况</a></li>
-                    	<li><a _href="<%=ctxPath %>/siteStat/qsfx.do" href="javascript:void(0)">趋势分析 </a></li>
-                    	<li><a _href="<%=ctxPath %>/siteStat/articlestat.do" href="javascript:void(0)">文章推送</a></li>                    
+                    	<li><a _href="<%=ctxPath %>/siteStat/zqgk.do" href="javascript:void(0)">今天访问</a></li>
+                    	<li><a _href="<%=ctxPath %>/siteStat/qsfx.do" href="javascript:void(0)">站点概况 </a></li>
+                    	<li><a _href="<%=ctxPath %>/siteStat/articlestat.do" href="javascript:void(0)">推送分析</a></li>                    
                     </ul>
                 </dd>
             </dl>
@@ -92,15 +92,6 @@
                 </dd>
             </dl>
             </shiro:hasPermission>
-            
-            <dl id="menu-comments">
-                <dt><i class="Hui-iconfont">&#xe63c;</i> 关于系统<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-                <dd>
-                    <ul>       
-                    <li><a _href="<%=ctxPath %>/AboutUs.do" href="javascript:void(0)">关于我们</a></li>      
-                    </ul>
-                </dd>
-            </dl>
         </div>
     </aside>
 <div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
@@ -120,5 +111,6 @@
 		</div>
 	</div>
 </section>
+<script type="text/javascript" src="<%=ctxPath %>/js/role.js"></script> 
 </body>
 </html>

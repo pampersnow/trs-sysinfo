@@ -9,6 +9,8 @@
 #updatePassword{box-shadow: 10px 10px 5px #888888;top:30%;left:29%;position:fixed;z-index:111;width:470px;height:220px;display: none;border:1px solid #0080ff;background:#fff;}
 .formControls{width: 80%;}
 .teble-style{ max-width: 100px;overflow: hidden; text-overflow:ellipsis;white-space: nowrap}
+.box { position:relative; }
+.box input { position:absolute; left:0px; top:0px; }
 </style>
 <link rel="stylesheet" href="<%=ctxPath %>/css/jquery-ui.min.css"> 
 <link rel="stylesheet" href="<%=ctxPath %>/css/select-2.css"> 
@@ -58,16 +60,18 @@
 			<span class="select-box" style="float: right; width: 120px;">
 				<select class="select" size="1" name="province" onChange="select()" style="font-size:16px;color: #1E90FF">	
 					<option>请选择站点</option>
-					<option>民航局内网</option>	
-					<option>中联部内网</option>	
-					<option>档案局内网</option>				
+					<option>北京农研中心</option>
+					<option>中联部</option>	
+					<option>教育部</option>	
+					<option>民航局</option>	
+					<option>北京农委</option>							
+					<option>国家档案局</option>			
 				</select>				
 			</span>
-		</div>
-	</form>			
+		</div>	
 			<img alt="" src="<%=ctxPath %>/images/tjs.png">&nbsp;
-	 	<input readonly="readonly" type=text name="" maxlength=12 
-	 			size=22 style="font-size:25px; color: #64849b; border: 0px; font-weight: bold;" value="民航内网">
+	 		<input readonly="readonly" type=text name="" maxlength=12 
+	 			size=22 style="font-size:25px; color: #64849b; border: 0px; font-weight: bold;" value="北京农研中心">
 			<p>
 				 <a href="<%=ctxPath %>/adminsite/list.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
@@ -77,8 +81,12 @@
 	<div id="mai" style="width: 100%; height: 435px; float: left;">
 		<script type="text/javascript">								
 			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('mai'),'macarons');												
-			option = {
+			var myChart = echarts.init(document.getElementById('mai'),'macarons');				        
+ 			option = {
+ 					title : {
+ 				        text: '站点访问来源统计',
+ 				        subtext: '统计所有'
+ 				    },
 				    tooltip : {
 				        trigger: 'axis'
 				    },
@@ -90,7 +98,7 @@
 				            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
 				            restore : {show: true},
 				            saveAsImage : {show: true}
-				        }
+				        }					   
 				    },
 				    calculable : true,
 				    legend: {
@@ -132,43 +140,108 @@
 				        },
 				        
 				    ]
-				};				                                        																				
+				}; 				                                        																				
+			myChart.setOption(option, true);
+		</script>
+	</div>
+<hr/><br/>
+	<div id="mais" style="width: 100%; height: 420px; float: left;">
+		<script type="text/javascript">								
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('mais'),'macarons');	
+			option = {
+					title : {
+ 				        text: '推送文章访问来源统计',
+ 				    },
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    legend: {
+				        data:['火狐','360','IE','搜狗','UC','谷歌','其他']
+				    },
+				    toolbox: {
+				        show : true,
+				        orient: 'vertical',
+				        x: 'right',
+				        y: 'center',
+				        feature : {
+				            mark : {show: true},
+				            dataView : {show: true, readOnly: false},
+				            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+				            restore : {show: true},
+				            saveAsImage : {show: true}
+				        }
+				    },
+				    calculable : true,
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['中国民用航空局电子政务内网','中共中央对外联络部政务信息内网']
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'火狐',
+				            type:'bar',
+				            data:[320, 332]
+				        },
+				        {
+				            name:'360',
+				            type:'bar',
+				            data:[120, 132]
+				        },
+				        {
+				            name:'IE',
+				            type:'bar',
+				            data:[220, 182]
+				        },
+				        {
+				            name:'搜狗',
+				            type:'bar',
+				            data:[150, 232]
+				        },
+				        {
+				            name:'UC',
+				            type:'bar',
+				            data:[862, 1018],
+				            markLine : {
+				                itemStyle:{
+				                    normal:{
+				                        lineStyle:{
+				                            type: 'dashed'
+				                        }
+				                    }
+				                },
+				                data : [
+				                    [{type : 'min'}, {type : 'max'}]
+				                ]
+				            }
+				        },
+				        {
+				            name:'谷歌',
+				            type:'bar',
+				            data:[120, 132]
+				        },				        
+				        {
+				            name:'其他',
+				            type:'bar',
+				            data:[62, 82]
+				        }
+				    ]
+				};			                                      																				
 			myChart.setOption(option, true);
 		</script>
 	</div>
 </div>          
-          <!-- 修改管理员用户 -->  
-          <!-- <div id="updatePassword" >
-			    <form action="" class="form form-horizontal" method="post">
-			    	<input type="hidden" name="id"  id="userID"/>
-			        <div class="row cl">
-			            <label class="form-label col-2">旧密码</label>
-			            <div class="formControls col-5">			           
-			            	<input type="password" class="input-text" id="password" />
-			            </div>			           		
-			        </div>
-			
-			        <div class="row cl">
-			            <label class="form-label col-2">新密码</label>
-			            <div class="formControls col-5">
-			            	<input type="password" class="input-text"  id="newpassword" />
-			            </div>		       
-			        </div>
-			        
-			        <div class="row cl">
-			            <label class="form-label col-2">确认密码</label>
-			            <div class="formControls col-5">
-			            	<input type="password" class="input-text"  id="renewpassword" />
-			            </div>			    
-			        </div>			     			
-			        <div class="row cl">
-			            <div class="col-9 col-offset-2">
-			                <input class="btn btn-primary radius" type="button" onclick="updatePW()" value="修改" />
-			                <input class="btn btn-default radius" type="button" value="关闭" onclick="closer()" style="margin-left: 30px;" />
-			            </div>
-			        </div>
-			    </form>
-		</div>              -->
+         
 <script type="text/javascript" src="<%=ctxPath %>/js/adminUser.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/excanvas.min.js"></script>

@@ -117,7 +117,7 @@ public class LoginController{
 	
 	/**
 	* @Description: 验证器，增加了登录次数校验功能
-	* @param um 登录账号
+	* @param userName 登录账号
 	* @throws  
 	 */
 	public String ExcessiveAttemptsInfo(String account){

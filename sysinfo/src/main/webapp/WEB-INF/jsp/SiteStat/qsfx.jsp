@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>趋势分析</title>
+<title>站点概况</title>
 <script src="../site/js/echarts.js"></script>
 <script src="../site/js/theme/macarons.js"></script>
 <script src="../site/js/jquery-1.7.2.min.js"></script>
@@ -26,7 +26,7 @@
 </head>
 <body>
     <h1 class="page-title">
-		>>趋势分析
+		>>站点访问统计
 	</h1>
 	<div class="container">
 					<div class="widget">

@@ -126,45 +126,7 @@ function sub(){
 			</c:forEach>  
         </tbody>
     </table>
-  <%--   <jsp:include page="/WEB-INF/jsp/page.jsp" flush="true"/> --%>
-</div>
-          
-          <!-- 修改管理员用户 -->  
-          <div id="updatePassword" >
-			    <form action="" class="form form-horizontal" method="post">
-			    	<input type="hidden" name="id"  id="userID"/>
-			        <div class="row cl">
-			            <label class="form-label col-2">旧密码</label>
-			            <div class="formControls col-5">			           
-			            	<input type="password" class="input-text" id="password" />
-			            </div>			           		
-			        </div>
-			
-			        <div class="row cl">
-			            <label class="form-label col-2">新密码</label>
-			            <div class="formControls col-5">
-			            	<input type="password" class="input-text"  id="newpassword" />
-			            </div>		       
-			        </div>
-			        
-			        <div class="row cl">
-			            <label class="form-label col-2">确认密码</label>
-			            <div class="formControls col-5">
-			            	<input type="password" class="input-text"  id="renewpassword" />
-			            </div>			    
-			        </div>
-			        
-			
-			        <div class="row cl">
-			            <div class="col-9 col-offset-2">
-			                <input class="btn btn-primary radius" type="button" onclick="updatePW()" value="修改" />
-			                <input class="btn btn-default radius" type="button" value="关闭" onclick="closer()" style="margin-left: 30px;" />
-			            </div>
-			        </div>
-			    </form>
-		</div>  
-            
-<script type="text/javascript" src="<%=ctxPath %>/js/adminUser.js"></script>
-
+  <%@include file="/WEB-INF/jsp/page.jsp" %>
+</div>                  
 </body>
 </html>

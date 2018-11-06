@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.mapper.DocdeliveryMapper">
+	<select id="selectall" resultType="Docdelivery">
+		SELECT a.*,b.`score` FROM
+		`docdelivery` AS a,`docdeliveryscore` AS b WHERE
+		a.`articleid`=b.`articleid`ORDER BY a.`doccount` DESC
+	</select>	
+</mapper>

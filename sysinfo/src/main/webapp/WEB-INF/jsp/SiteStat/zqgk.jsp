@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>站群概况</title>
+<title>今日概况</title>
 <script src="../site/js/echarts.js"></script>
 <script src="../site/js/theme/macarons.js"></script>
 <script src="../site/js/jquery-1.7.2.min.js"></script>
@@ -28,7 +28,7 @@
 </head>
 <body style="background-color: #ffffff;">
 	<h1 class="page-title">
-		>>当日访问量统计
+		>>今日访问实时统计
 	</h1>
 		<div class="container">
 						<h2 style="float: left; width: 870px;">
