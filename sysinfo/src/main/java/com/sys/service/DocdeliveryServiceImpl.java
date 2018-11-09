@@ -1,6 +1,8 @@
 package com.sys.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -13,11 +15,23 @@ public class DocdeliveryServiceImpl implements DocdeliveryService {
 	
 	@Resource
 	private DocdeliveryMapper Docdeliverymapper;
-	
+	Map<String,Long> map = new HashMap<String,Long>();
+
 	@Override
-	public List<Docdelivery> queryall() throws Exception {
+	public List<Docdelivery> selectByPage(Long currPage, Long pageSize)
+			throws Exception {
 		// TODO Auto-generated method stub
-		return Docdeliverymapper.selectall();
+		map.put("currPage", currPage);
+		map.put("pageSize", pageSize);
+		return Docdeliverymapper.selectByPage(map);
 	}
+
+	@Override
+	public Long selectCount() throws Exception {
+		// TODO Auto-generated method stub
+		return Docdeliverymapper.selectCount();
+	}
+	
+
 
 }

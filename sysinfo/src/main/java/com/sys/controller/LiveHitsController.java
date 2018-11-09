@@ -3,6 +3,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,21 +37,35 @@ public class LiveHitsController {
 	private DocdeliveryService docdeliveryService;
 	
 	/*
-	 * 显示所有信息	
+	 * 分页显示所有访客信息	
 	 * 按时间排序  
 	 * 默认：降序排列
 	 * */
 	@RequestMapping("VisitorList.do")
-	public ModelAndView getFklbInfo() throws Exception {
-		
+	public String getFklbInfo(HttpServletRequest request,
+								@RequestParam(value="currPage",required=false) Long curr,
+								@RequestParam(value="pageSize",required=false) Long pageSize ) throws Exception {	
 		//日志打印
 		logger.debug("getFklbInfo====================================");
-		
-		ModelAndView mv=new ModelAndView(); 
-		List<Fklb> listFklb=fklbService.getSelectFklbInfo();
-		mv.addObject("listFklb", listFklb);
-    	mv.setViewName("LiveHits/livehits");
-		return mv;	
+		if(curr==null){
+			curr=1L;
+		}
+		if(pageSize==null){
+			pageSize=10L;
+		}
+		Long currPage = (curr-1)*pageSize;
+		Long count = fklbService.selectCount();
+		Long totalPage = 0L;
+		if(count>0){
+			totalPage = count%pageSize==0?count/pageSize:(count/pageSize)+1;
+		}
+		List<Fklb> listFklb=fklbService.selectByPage(currPage, pageSize);
+		request.setAttribute("listFklb", listFklb);
+		request.setAttribute("count", count);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("currPage", curr);
+		request.setAttribute("pageSize", pageSize);
+		return "LiveHits/livehits";	
 	}
 	/*
 	 * 多字段模糊查询
@@ -68,9 +83,9 @@ public class LiveHitsController {
 	
 	@RequestMapping("doByTime.do")
 	public ModelAndView getselectFklbByTimeAll(@RequestParam(value="startTime",required=false)
-											@DateTimeFormat(pattern="yyyy-MM-dd")Date startTime,
-											@RequestParam(value="endTime",required=false)
-											@DateTimeFormat(pattern="yyyy-MM-dd")Date endTime)throws Exception{
+												@DateTimeFormat(pattern="yyyy-MM-dd")Date startTime,
+												@RequestParam(value="endTime",required=false)
+												@DateTimeFormat(pattern="yyyy-MM-dd")Date endTime)throws Exception{
 		//日志打印
 		logger.debug("getselectFklbByTimeAll====================================");
 		ModelAndView mv=new ModelAndView();
@@ -85,13 +100,29 @@ public class LiveHitsController {
 	 * 导航标签跳转
 	 */
 	@RequestMapping("articlepush.do")
-	public ModelAndView articlepush()throws Exception{
+	public String articlepush(HttpServletRequest request,
+								@RequestParam(value="currPage",required=false) Long curr,
+								@RequestParam(value="pageSize",required=false) Long pageSize ) throws Exception{
 		//日志打印
 		logger.debug("articlepush====================================");
-		ModelAndView mv=new ModelAndView();
-		List<Docdelivery> doclist = docdeliveryService.queryall();
-		mv.addObject("doclist", doclist);
-    	mv.setViewName("LiveHits/articlepush");
-		return mv;		
+		if(curr==null){
+			curr=1L;
+		}
+		if(pageSize==null){
+			pageSize=10L;
+		}
+		Long currPage = (curr-1)*pageSize;
+		Long count = docdeliveryService.selectCount();
+		Long totalPage = 0L;
+		if(count>0){
+			totalPage = count%pageSize==0?count/pageSize:(count/pageSize)+1;
+		}
+		List<Docdelivery> doclist=docdeliveryService.selectByPage(currPage, pageSize);
+		request.setAttribute("doclist", doclist);
+		request.setAttribute("count", count);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("currPage", curr);
+		request.setAttribute("pageSize", pageSize);
+		return "LiveHits/articlepush";		
 	}
 }

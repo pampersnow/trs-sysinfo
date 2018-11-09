@@ -2,13 +2,17 @@ package com.sys.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sys.pojo.SiteInfo;
 import com.sys.service.SiteInfoService;
+
 /**  
 * @ClassName: AdminUserController  
 * @Description: 站点管理
@@ -21,18 +25,37 @@ import com.sys.service.SiteInfoService;
 public class AdminSiteController {
 	@Autowired
 	private SiteInfoService siteInfoService;
-	
 	/**
-	 * 站点列表
+	* @Description: 站点列表
+	* @param request
+	* @param curr
+	* @param pageSize
+	* @return
+	* @throws  
 	 */
 	@RequestMapping("list.do")
-	public ModelAndView list()throws Exception{
-		ModelAndView mv=new ModelAndView(); 
-		List<SiteInfo> adminSiteList = siteInfoService.querySiteinfo();
-		mv.addObject("adminSiteList", adminSiteList);
-    	mv.setViewName("adminSite/list");
-		return mv;
-	}
+	public String siteList(HttpServletRequest request,@RequestParam(value="currPage",required=false) Long curr,
+													  @RequestParam(value="pageSize",required=false) Long pageSize)throws Exception{
+		if(curr==null){
+			curr=1L;
+		}
+		if(pageSize==null){
+			pageSize=10L;
+		}
+		Long currPage = (curr-1)*pageSize;
+		Long count = siteInfoService.selectCount();
+		Long totalPage = 0L;
+		if(count>0){
+			totalPage = count%pageSize==0?count/pageSize:(count/pageSize)+1;
+		}
+		List<SiteInfo> adminSiteList = siteInfoService.selectByPage(currPage, pageSize);
+		request.setAttribute("adminSiteList", adminSiteList);
+		request.setAttribute("count", count);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("currPage", curr);
+		request.setAttribute("pageSize", pageSize);
+	 return "adminSite/list";		
+	}		
 	
 	@RequestMapping("add.do")
 	public ModelAndView add(){

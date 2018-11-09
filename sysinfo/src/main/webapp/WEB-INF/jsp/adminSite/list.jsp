@@ -10,6 +10,7 @@
 .formControls{width: 80%;}
 </style>
 <title>站点管理</title>
+<script type="text/javascript"src="../js/PagingClick.js"></script> 
 </head>
 <body>
 <div class="pd-20">
@@ -63,6 +64,13 @@
         </tbody>
     </table>
     <%@include file="/WEB-INF/jsp/page.jsp" %>
-</div>      
+</div>  
+
+<script type="text/javascript">
+/**分页*/
+function nextPage(currPage,pageSize){	
+	window.location="list.do?currPage="+currPage+"&pageSize="+pageSize+"";
+}
+</script>   
 </body>
 </html>

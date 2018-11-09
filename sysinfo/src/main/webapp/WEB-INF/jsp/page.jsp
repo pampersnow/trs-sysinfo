@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<title>TRS内网信息统计平台</title>
+<title>内网访客统计平台</title>
 <style type="text/css">
 #pagination,.f-16,#pagination li{
 	display: inline;

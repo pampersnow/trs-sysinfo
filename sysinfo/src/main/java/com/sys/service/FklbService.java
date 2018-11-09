@@ -1,7 +1,9 @@
 package com.sys.service;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
 import com.sys.pojo.Fklb;
 
 /**
@@ -29,10 +31,17 @@ public interface FklbService {
 	 	
 	 
 	/**
-	* 显示所有信息	按时间排序   默认：降序排列
+	* 分页查询所有访客记录	按时间排序   默认：降序排列
 	* @return
 	* @throws Exception
 	*/
-	 List<Fklb> getSelectFklbInfo()throws Exception;
+	 List<Fklb> selectByPage(Long currPage,Long pageSize)throws Exception;
+	 
+	/**
+	* 查询总记录数
+	* @return
+	* @throws Exception
+	*/
+	 Long selectCount()throws Exception;
 
 }

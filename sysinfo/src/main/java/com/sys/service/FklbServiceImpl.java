@@ -1,8 +1,13 @@
 package com.sys.service;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import com.sys.mapper.FklbMapper;
 import com.sys.pojo.Fklb;
 /**
@@ -16,12 +21,7 @@ public class FklbServiceImpl implements FklbService{
 
 	@Resource
 	private FklbMapper fklbMapper; 
-
-	@Override
-	public List<Fklb> getSelectFklbInfo() throws Exception {
-		// TODO Auto-generated method stub
-		return fklbMapper.selectFklbInfo();
-	}
+	Map<String,Long> map = new HashMap<String,Long>();
 
 	@Override
 	public List<Fklb> getQueryMore(String siteid) throws Exception {
@@ -34,5 +34,20 @@ public class FklbServiceImpl implements FklbService{
 			throws Exception {
 		// TODO Auto-generated method stub
 		return fklbMapper.selectPeriodOfTimeInfo(startTime, endTime);
+	}
+
+	@Override
+	public List<Fklb> selectByPage(Long currPage, Long pageSize)
+			throws Exception {
+		// TODO Auto-generated method stub
+		map.put("currPage", currPage);
+		map.put("pageSize", pageSize);
+		return fklbMapper.selectByPage(map);
+	}
+
+	@Override
+	public Long selectCount() throws Exception {
+		// TODO Auto-generated method stub
+		return fklbMapper.selectCount();
 	}
 }

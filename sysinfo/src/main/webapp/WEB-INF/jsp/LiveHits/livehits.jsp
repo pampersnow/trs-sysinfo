@@ -11,45 +11,9 @@
 .teble-style{ max-width: 100px;overflow: hidden; text-overflow:ellipsis;white-space: nowrap}
 </style>
 <link rel="stylesheet" href="../css/jquery-ui.min.css"> 
+<script type="text/javascript"src="../js/PagingClick.js"></script>   
+<script type="text/javascript" src="../js/DownloadReport.js"></script>  
 <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
- <script>
- window.onload = function () {
-     tableToExcel('tableToExcel', '访客列表')
- };
- //base64转码
- var base64 = function (s) {
-     return window.btoa(unescape(encodeURIComponent(s)));
- };
- //替换table数据和worksheet名字
- var format = function (s, c) {
-     return s.replace(/{(\w+)}/g,
-         function (m, p) {
-             return c[p];
-         });
- }
- function tableToExcel(tableid, sheetName) {
-     var uri = 'data:application/vnd.ms-excel;base64,';
-     var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"' +
-         'xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>'
-         + '<x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>'
-         + '</x:ExcelWorkbook></xml><![endif]-->' +
-         ' <style type="text/css">' +
-         'table td {' +
-         'border: 1px solid #000000;' +
-         'width: 200px;' +
-         'height: 30px;' +
-         ' text-align: center;' +
-         'background-color: #ffffff;' +
-         'color: #000000' +
-         ' }' +
-         '</style>' +
-         '</head><body ><table class="excelTable">{table}</table></body></html>';
-     if (!tableid.nodeType) tableid = document.getElementById(tableid);
-     var ctx = {worksheet: sheetName || 'Worksheet', table: tableid.innerHTML};
-     document.getElementById("excelOut").href = uri + base64(format(template, ctx));
- }
-
-    </script>
 <title>管理员用户列表</title>
 </head>
 <script type="text/javascript">
@@ -127,6 +91,12 @@ function sub(){
         </tbody>
     </table>
   <%@include file="/WEB-INF/jsp/page.jsp" %>
-</div>                  
+</div>   
+<script type="text/javascript">
+/**分页*/
+function nextPage(currPage,pageSize){	
+	window.location="VisitorList.do?currPage="+currPage+"&pageSize="+pageSize+"";
+}
+</script>          
 </body>
 </html>

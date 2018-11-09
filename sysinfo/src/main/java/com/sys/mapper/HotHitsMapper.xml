@@ -14,17 +14,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT 10
 	</select>
 
-	<select id="selectRdlmAsc" resultType="Rdlm">
-		SELECT
-		siteid,pageid,`type`,
-		COUNT( * ) AS `count`
-		FROM zlvisitdata
-		GROUP BY
-		`type`
-		ORDER BY `count` ASC
-		LIMIT 10
-	</select>
-
 	<select id="selectRdlmByTimeAll" resultType="Rdlm"
 		parameterType="Date">
 		SELECT siteid,pageid,`type`,
@@ -51,18 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		BY `title`
 		ORDER BY `COUNT`
 		DESC
-		LIMIT 10
-	</select>
-
-	<select id="showRdwzInfoASC" resultType="Rdwz">
-		SELECT siteid,
-		title,articleid,WriteTime,
-		COUNT( * ) AS `COUNT`
-		FROM zlvisitdata
-		GROUP
-		BY `title`
-		ORDER BY `COUNT`
-		ASC
 		LIMIT 10
 	</select>
 

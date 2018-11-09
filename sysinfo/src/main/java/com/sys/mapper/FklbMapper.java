@@ -1,6 +1,7 @@
 package com.sys.mapper;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -22,18 +23,19 @@ public interface FklbMapper {
 	public List<Fklb> queryMore(@Param("siteid") String siteid)throws Exception;
 
 	/**
-	* 显示所有信息	按时间排序   默认：降序排列
+	* 分页查询	按时间排序   默认：降序排列
+	* @param map
 	* @return
 	* @throws Exception
 	*/
-	public List<Fklb> selectFklbInfo()throws Exception;
+	public List<Fklb> selectByPage(Map<String, Long> map)throws Exception;
 	
 	 /**
-     * 查询用户记录总数
+     * 查询访客记录总数
      * @return
      * @throws Exception
      */
-    public int selectCount()throws Exception;
+    public Long selectCount()throws Exception;
     		
 	/**
 	* 根据日期段查找访客信息
