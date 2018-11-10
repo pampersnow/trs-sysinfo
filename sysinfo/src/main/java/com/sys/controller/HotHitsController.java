@@ -1,7 +1,10 @@
 package com.sys.controller;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.sys.pojo.Rdlm;
 import com.sys.pojo.Rdwz;
 import com.sys.service.HotArticleService;
@@ -38,25 +42,29 @@ public class HotHitsController {
 	/****热点栏目****/
 	// 降序排列栏目记录
 	@RequestMapping("hotsection.do")
-	public ModelAndView queryRdlmList() throws Exception {
+	public String queryRdlmList(HttpServletRequest request,
+								@RequestParam(value="currPage",required=false) Long curr,
+								@RequestParam(value="pageSize",required=false) Long pageSize ) throws Exception {
 		logger.debug("queryRdlmList====================================");
-		ModelAndView mv = new ModelAndView();
-		List<Rdlm> rdlmlist = hotSectionService.getSelectRdlm();
-		mv.addObject("rdlmlist", rdlmlist);
-		mv.setViewName("HotHits/HotSection");
-		return mv;
-	}
-
-	// 升序排列栏目记录
-	@RequestMapping("doRdlmAsc.do")
-	public ModelAndView queryRdlmListAsc() throws Exception {
-
-		logger.debug("queryRdlmListAsc====================================");
-		ModelAndView mv = new ModelAndView();
-		List<Rdlm> rdlmasclist = hotSectionService.getSelectRdlmAsc();
-		mv.addObject("rdlmlist", rdlmasclist);
-		mv.setViewName("HotHits/HotSection");
-		return mv;
+		if(curr==null){
+			curr=1L;
+		}
+		if(pageSize==null){
+			pageSize=10L;
+		}
+		Long currPage = (curr-1)*pageSize;
+		Long count = hotSectionService.selectCountRdlm();
+		Long totalPage = 0L;
+		if(count>0){
+			totalPage = count%pageSize==0?count/pageSize:(count/pageSize)+1;
+		}
+		List<Rdlm> rdlmlist = hotSectionService.selectByPageRdlm(currPage, pageSize);
+		request.setAttribute("rdlmlist", rdlmlist);
+		request.setAttribute("count", count);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("currPage", curr);
+		request.setAttribute("pageSize", pageSize);
+		return "HotHits/HotSection";
 	}
 
 	// 指定日期查询栏目
@@ -79,26 +87,32 @@ public class HotHitsController {
 	/****热点文章****/
 	// 降序排列热点文章
 	@RequestMapping("hotarticle.do")
-	public ModelAndView getRdwzInfo() throws Exception {
+	public String getRdwzInfo(HttpServletRequest request,
+								@RequestParam(value="currPage",required=false) Long curr,
+								@RequestParam(value="pageSize",required=false) Long pageSize ) throws Exception {
 		// 日志打印
 		logger.debug("getRdwzInfo====================================");
-		ModelAndView mv = new ModelAndView();
-		List<Rdwz> rdwzList = hotArticleService.getSelectRdwz();		
-		mv.addObject("rdwzList", rdwzList);
-		mv.setViewName("HotHits/HotArticle");
-		return mv;
+		if(curr==null){
+			curr=1L;
+		}
+		if(pageSize==null){
+			pageSize=10L;
+		}
+		Long currPage = (curr-1)*pageSize;
+		Long count = hotArticleService.selectCount();
+		Long totalPage = 0L;
+		if(count>0){
+			totalPage = count%pageSize==0?count/pageSize:(count/pageSize)+1;
+		}
+		List<Rdwz> rdwzList = hotArticleService.selectByPage(currPage, pageSize);
+		request.setAttribute("rdwzList", rdwzList);
+		request.setAttribute("count", count);
+		request.setAttribute("totalPage", totalPage);
+		request.setAttribute("currPage", curr);
+		request.setAttribute("pageSize", pageSize);
+		return "HotHits/HotArticle";
 	}
 
-	// 升序排列热点栏目,文章
-	@RequestMapping("doRdlmASC.do")
-	public ModelAndView queryRdwzListAsc() throws Exception {
-		logger.debug("queryRdwzListAsc====================================");
-		ModelAndView mv = new ModelAndView();
-		List<Rdwz> rdwzasclist = hotArticleService.getSelectRdwzASC();
-		mv.addObject("rdwzList", rdwzasclist);
-		mv.setViewName("HotHits/HotArticle");
-		return mv;
-	}
 
 	// 指定日期查询热点文章
 	@RequestMapping("doByTimeRdwz.do")

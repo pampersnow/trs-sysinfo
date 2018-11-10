@@ -3,7 +3,6 @@ import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.sys.pojo.Rdlm;
-
 /**
  * @author JYB 
  * 创建日期：2018-05-16 
@@ -13,14 +12,18 @@ import com.sys.pojo.Rdlm;
 public interface HotSectionService {
 
 	/**
-	 * 升序查询热点栏目
-	 * */
-	public List<Rdlm> getSelectRdlm() throws Exception;
-
+	* 分页查询热点栏目记录	按时间排序   默认：降序排列
+	* @return
+	* @throws Exception
+	*/
+	 List<Rdlm> selectByPageRdlm(Long currPage,Long pageSize)throws Exception;
+	 
 	/**
-	 * 降序查询热点栏目
-	 * */
-	public List<Rdlm> getSelectRdlmAsc() throws Exception;
+	* 查询热点栏目总记录数
+	* @return
+	* @throws Exception
+	*/
+	 Long selectCountRdlm()throws Exception;
 
 	/**
 	 * 指定日期查询热点栏目

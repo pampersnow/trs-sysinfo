@@ -4,14 +4,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sys.mapper.HotHitsMapper">
 
-	<select id="selectRdlm" resultType="Rdlm">
+	<select id="selectByPageRdlm" resultType="Rdlm" parameterType="map">
 		SELECT siteid,pageid,`type`,
 		COUNT( * ) AS `count`
 		FROM zlvisitdata
 		GROUP BY `type`
 		ORDER BY `count`
 		DESC
-		LIMIT 10
+		LIMIT #{currPage},#{pageSize}
+	</select>
+
+	<select id="selectCountRdlm" resultType="long">
+		SELECT COUNT( DISTINCT`type` ) FROM zlvisitdata 
 	</select>
 
 	<select id="selectRdlmByTimeAll" resultType="Rdlm"
@@ -31,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT 10
 	</select>
 
-	<select id="showRdwzInfo" resultType="Rdwz">
+	<select id="selectByPageRdwz" resultType="Rdwz" parameterType="map">
 		SELECT siteid,
 		title,articleid,WriteTime,
 		COUNT( * ) AS `COUNT`
@@ -40,7 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		BY `title`
 		ORDER BY `COUNT`
 		DESC
-		LIMIT 10
+		LIMIT #{currPage},#{pageSize}
+	</select>
+
+	<select id="selectCountRdwz" resultType="long">
+		SELECT COUNT( DISTINCT`title` ) FROM zlvisitdata 		
 	</select>
 
 	<select id="selectRdwzByTimeAll" resultType="Rdwz"

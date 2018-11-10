@@ -13,14 +13,18 @@ import com.sys.pojo.Rdwz;
 public interface HotArticleService {
 
 	/**
-	 * 查询所有热点文章 降序排列
-	 * */
-	public List<Rdwz> getSelectRdwz() throws Exception;
-
+	* 分页查询热点文章记录	按时间排序   默认：降序排列
+	* @return
+	* @throws Exception
+	*/
+	 List<Rdwz> selectByPage(Long currPage,Long pageSize)throws Exception;
+	 
 	/**
-	 * 查询所有热点文章 升序排列
-	 * */
-	public List<Rdwz> getSelectRdwzASC() throws Exception;
+	* 查询热点文章总记录数
+	* @return
+	* @throws Exception
+	*/
+	 Long selectCount()throws Exception;
 
 	/**
 	 * 按日期查询热点文章

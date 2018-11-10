@@ -1,8 +1,13 @@
 package com.sys.service;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import com.sys.mapper.HotHitsMapper;
 import com.sys.pojo.Rdwz;
 /**
@@ -16,23 +21,27 @@ public class HotArticleServiceImpl implements HotArticleService {
 
 	@Resource
 	private HotHitsMapper hothitsMapper;
-	
-	@Override
-	public List<Rdwz> getSelectRdwz() throws Exception {
-		// TODO Auto-generated method stub
-		return hothitsMapper.showRdwzInfo();
-	}
-
-	@Override
-	public List<Rdwz> getSelectRdwzASC() throws Exception {
-		// TODO Auto-generated method stub
-		return hothitsMapper.showRdwzInfoASC();
-	}
+	Map<String,Long> map = new HashMap<String,Long>();
 
 	@Override
 	public List<Rdwz> getselectRdwzByTimeAll(Date startTime, Date endTime)
 			throws Exception {
 		// TODO Auto-generated method stub
 		return hothitsMapper.selectRdwzByTimeAll(startTime, endTime);
+	}
+
+	@Override
+	public List<Rdwz> selectByPage(Long currPage, Long pageSize)
+			throws Exception {
+		// TODO Auto-generated method stub
+		map.put("currPage", currPage);
+		map.put("pageSize", pageSize);
+		return hothitsMapper.selectByPageRdwz(map);
+	}
+
+	@Override
+	public Long selectCount() throws Exception {
+		// TODO Auto-generated method stub
+		return hothitsMapper.selectCountRdwz();
 	}
 }

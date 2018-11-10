@@ -1,6 +1,7 @@
 package com.sys.mapper;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.sys.pojo.Rdlm;
 import com.sys.pojo.Rdwz;
@@ -11,15 +12,21 @@ import com.sys.pojo.Rdwz;
  * 接口说明：热点栏目 			
  */
 public interface HotHitsMapper {
-	/**
-	 * 查询所有热点栏目  降序排列
-	 * */
-	public List<Rdlm> selectRdlm()throws Exception;
 	
 	/**
-	 * 查询所有热点栏目  升序排列
-	 * */
-	public List<Rdlm> selectRdlmAsc()throws Exception;
+	* 分页查询热点栏目	按时间排序   默认：降序排列
+	* @param map
+	* @return
+	* @throws Exception
+	*/
+	public List<Rdlm> selectByPageRdlm(Map<String, Long> map)throws Exception;
+	
+	 /**
+     * 查询热点栏目总数
+     * @return
+     * @throws Exception
+     */
+    public Long selectCountRdlm()throws Exception;
 	
 	/**
 	 * 按日期查询热点栏目
@@ -28,14 +35,20 @@ public interface HotHitsMapper {
 											@Param("endTime") Date endTime)throws Exception;
 
 	/**
-	 * 查询所有热点文章 降序排列
-	 * */
-	public List<Rdwz> showRdwzInfo()throws Exception;
+	* 分页查询热点栏目	按时间排序   默认：降序排列
+	* @param map
+	* @return
+	* @throws Exception
+	*/
+	public List<Rdwz> selectByPageRdwz(Map<String, Long> map)throws Exception;
 	
-	/**
-	 * 查询所有热点文章 升序排列
-	 * */
-	public List<Rdwz> showRdwzInfoASC()throws Exception;
+	 /**
+     * 查询热点栏目总数
+     * @return
+     * @throws Exception
+     */
+    public Long selectCountRdwz()throws Exception;
+
 	
 	/**
 	 * 按日期查询热点文章

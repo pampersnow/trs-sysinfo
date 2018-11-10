@@ -60,7 +60,10 @@
   <%@include file="/WEB-INF/jsp/page.jsp" %> 
 </div>
 <script type="text/javascript">
-
+/**分页*/
+function nextPage(currPage,pageSize){	
+	window.location="hotsection.do?currPage="+currPage+"&pageSize="+pageSize+"";
+}
 </script>
 </body>
 </html>

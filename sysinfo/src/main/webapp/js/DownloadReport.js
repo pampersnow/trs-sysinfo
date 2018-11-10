@@ -5,7 +5,7 @@ window.onload = function () {
  var base64 = function (s) {
      return window.btoa(unescape(encodeURIComponent(s)));
  };
- //替换table数据和worksheet名字
+ //替换table数据和worksheet名字      resin  Docker
  var format = function (s, c) {
      return s.replace(/{(\w+)}/g,
          function (m, p) {
