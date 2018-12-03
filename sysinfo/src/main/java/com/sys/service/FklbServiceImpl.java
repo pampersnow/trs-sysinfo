@@ -24,12 +24,6 @@ public class FklbServiceImpl implements FklbService{
 	Map<String,Long> map = new HashMap<String,Long>();
 
 	@Override
-	public List<Fklb> getQueryMore(String siteid) throws Exception {
-		// TODO Auto-generated method stub
-		return fklbMapper.queryMore(siteid);
-	}
-
-	@Override
 	public List<Fklb> selectFklbByTimeAll(Date startTime, Date endTime)
 			throws Exception {
 		// TODO Auto-generated method stub
@@ -49,5 +43,13 @@ public class FklbServiceImpl implements FklbService{
 	public Long selectCount() throws Exception {
 		// TODO Auto-generated method stub
 		return fklbMapper.selectCount();
+	}
+
+	@Override
+	public List<Fklb> queryFuzzySearch(String ip, String area,
+			String accesstime, String siteid, String pageid, String type,
+			String title, String writetime, String articleid) throws Exception {
+		// TODO Auto-generated method stub
+		return fklbMapper.selectFuzzySearch(ip, area, accesstime, siteid, pageid, type, title, writetime, articleid);
 	}
 }

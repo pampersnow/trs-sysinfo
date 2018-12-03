@@ -15,12 +15,16 @@ import com.sys.pojo.Fklb;
 public interface FklbService {
 	
 	/**
-	* 动态查询	模糊根据站点id查询
+	* 动态查询	模糊查询 - all
 	* @param siteid
 	* @return
 	* @throws Exception
 	*/
-	List<Fklb> getQueryMore(@Param("siteid")String siteid)throws Exception;
+	List<Fklb> queryFuzzySearch (@Param("ip") String ip,@Param("area") String area,
+			@Param("accesstime") String accesstime,@Param("siteid") String siteid,
+			@Param("pageid") String pageid,@Param("type") String type,
+			@Param("title") String title,@Param("writetime") String writetime,
+			@Param("articleid") String articleid)throws Exception;
 
 	/**
 	* 根据日期查找访客信息

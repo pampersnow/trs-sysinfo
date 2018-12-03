@@ -2,7 +2,6 @@
  * 
  */
 package com.sys.controller;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,17 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sys.common.JedisUtils;
 import com.sys.pojo.AdminUser;
 import com.sys.service.AdminUserService;
-import com.sys.common.JedisUtils;
 import com.sys.shiro.ShiroUtils;
-
 
 /**  
 * @ClassName: LoginController  
 * @Description: 登录
 * @author JYB
-* @Date 2018年9月9日下午12:24:19
+* @Date 2018年9月9日  12:24:19
 * @version 1.00
 */
 @Controller

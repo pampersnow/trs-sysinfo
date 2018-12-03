@@ -1,6 +1,8 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>     
 <!DOCTYPE HTML>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <%@include file="/WEB-INF/jsp/header.jsp" %>
@@ -16,10 +18,9 @@
 <link rel="stylesheet" href="<%=ctxPath %>/css/select-2.css"> 
 <script src="<%=ctxPath %>/site/js/echarts.js"></script>
 <script src="<%=ctxPath %>/site/js/theme/macarons.js"></script>
-<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
 <title>管理员用户列表</title>
 </head>
-<body onload="init()">
+<body onload="init()" style="overflow-y:hidden">
 <script type="text/javascript">
 </script>	
 <div class="pd-20">
@@ -29,13 +30,13 @@
 			<h4 style="color:#DC143C;">
 				今日热点文章
 			</h4>
-			<p style="color:#BA55D3;">
-				<tbody>
-					<tr >						
-						<li limit="12"> 习近平会见四川航空“中国民航英雄机组”全体成员</li>
-						<li limit="12"> 中国共产党民航华北地区管理局第二次代表大会召开</li>
-						<li limit="12"> 全国民航冬春航季航班计划将于28日起执行</li>
-					</tr>
+			<p style="color:#BA55D3;">		
+				<tbody>		
+					<tr>
+					 	<c:forEach items="${list}" var="lists" varStatus="vs">
+					 		<li limit="14" style="color: #1E90FF">${lists.title}</li> 
+					 	</c:forEach>	
+					</tr> 
 				</tbody>
 			</p>
 			<p>
@@ -46,32 +47,68 @@
 			<h2 style="color:#DC143C;">
 				今日浏览量
 			</h2>
-			<p style="color:#BA55D3; font-size:18px;">
-				3390
-			</p>
+			<span id="sp" style="color:#BA55D3; font-size:18px;"></span>
+				<script type="text/javascript">						       						
+					$.ajax({
+						url : '../siteStat/getEchartsData.do',
+						date : "",
+						type : 'get',
+						dataType : "json",
+						async : false, //同步
+						contentType : 'application/json;charset=utf-8',
+						success : function(data) {
+						$("#sp").html(data.count);  
+					}
+				}) 							
+				</script>			
 			<p>
 				 <a href="<%=ctxPath %>/siteStat/zqgk.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
 		</div>
 		
 		<div class="col-md-4 column">
-		<form action="" method=post name="creator" enctype="multipart/form-data">
-			<div class="col-xs-6" style="float: right;">
-			<span class="select-box" style="float: right; width: 120px;">
-				<select class="select" size="1" name="province" onChange="select()" style="font-size:16px;color: #1E90FF">	
-					<option>请选择站点</option>
-					<option>北京农研中心</option>
-					<option>中联部</option>	
-					<option>教育部</option>	
-					<option>民航局</option>	
-					<option>北京农委</option>							
-					<option>国家档案局</option>			
-				</select>				
+			<div class="col-xs-6" style="float: right;">			
+			<span class="select-box" style="float: right; width: 210px;">
+				<select id="test" class="select" size="1" name="province" onChange="tt(this.id)" style="font-size:16px;color: #1E90FF">												
+				</select>	
+				<script>
+					$.ajax({
+						url : '../Welcome/getSite.do',
+						date : "",
+						type : 'get',
+						dataType : "json",
+						async : false, //同步
+						contentType : 'application/json;charset=UTF-8',
+						success : function(data) {
+					          /* if(data['success']){ */
+		                          var html="<option value=''>请选择站点</option>";
+		                          for(var i=0;i<data.length;i++){
+		                               html += "<option value= '"+data[i].siteid+"'>"+data[i].sitename+"</option>";
+		                          }
+		                          $("#test").html('').append(html);  
+		                      /* } */
+						}
+					})            
+			</script>			
 			</span>
 		</div>	
 			<img alt="" src="<%=ctxPath %>/images/tjs.png">&nbsp;
-	 		<input readonly="readonly" type=text name="" maxlength=12 
-	 			size=22 style="font-size:25px; color: #64849b; border: 0px; font-weight: bold;" value="北京农研中心">
+	 		<input id="txt" readonly="readonly" type=text name="" maxlength=12 
+	 			size=22 style="font-size:25px; color: #64849b; border: 0px; font-weight: bold;" >
+	 		<script>
+            function tt(id) {
+                var aa = document.getElementById(id);
+                var i = aa.selectedIndex;
+                var text = aa.options[i].text;
+                var value = aa.options[i].value;
+                if(value == 3) {
+
+                    text = "请手动填写原因";
+                document.getElementById("txt").disabled=false;
+                }
+                document.getElementById("txt").value = text;
+            }
+        </script>	 			
 			<p>
 				 <a href="<%=ctxPath %>/adminsite/list.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
@@ -85,7 +122,7 @@
  			option = {
  					title : {
  				        text: '站点访问来源统计',
- 				        subtext: '统计所有'
+ 				        subtext: '本站点统计'
  				    },
 				    tooltip : {
 				        trigger: 'axis'
@@ -101,14 +138,11 @@
 				        }					   
 				    },
 				    calculable : true,
-				    legend: {
-				        data:['火狐','360','IE','搜狗','UC','谷歌','其他']
-				    },
 				    xAxis : [
 				        {	name :'访问来源',
 				            type : 'category',
 				            splitLine : {show : false},
-				            data : ['火狐','360','IE','搜狗','UC','谷歌','其他']
+				            data : []
 				        }
 				    ],
 				    yAxis : [
@@ -121,7 +155,7 @@
 				        {
 				            name:'访问量',
 				            type:'line',
-				            data:[862, 1018, 964, 1026, 1679, 1600, 1570],
+				            data:[],
 							markPoint : {
 		            			data : [ {
 		            				type : 'max',
@@ -140,106 +174,42 @@
 				        },
 				        
 				    ]
-				}; 				                                        																				
+				}; 
+ 			var _session = [];
+			var _sessioncount = [];
+ 			$.ajax({
+ 				url : "../Welcome/RefererCount.do",//请求发送
+				date : "",
+				type : "get", //get请求方式															
+				dataType : "json", //返回数据形式为json
+				success : function(data) {
+					if (data != null&& data.length > 0) {
+						for (var i = 0; i < data.length; i++) {
+							_session.push(data[i].session);
+							_sessioncount.push(data[i].sessioncount);
+						}
+						myChart.hideLoading(); //隐藏加载动画	
+						myChart.setOption(option);
+						myChart.setOption({ //载入数据
+							xAxis : {
+								data : _session
+							//填入X轴数据
+							},
+							series : [ //填入系列（内容）数据
+							{
+								// 根据名字对应到相应的系列						
+								data : _sessioncount
+							} ]
+						});
+					} else {
+						alert("图表请求数据失败，可能是服务器开小差了");
+					}
+				}
+ 			});
 			myChart.setOption(option, true);
 		</script>
 	</div>
-<hr/><br/>
-	<div id="mais" style="width: 100%; height: 420px; float: left;">
-		<script type="text/javascript">								
-			// 基于准备好的dom，初始化echarts实例
-			var myChart = echarts.init(document.getElementById('mais'),'macarons');	
-			option = {
-					title : {
- 				        text: '推送文章访问来源统计',
- 				    },
-				    tooltip : {
-				        trigger: 'axis',
-				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-				        }
-				    },
-				    legend: {
-				        data:['火狐','360','IE','搜狗','UC','谷歌','其他']
-				    },
-				    toolbox: {
-				        show : true,
-				        orient: 'vertical',
-				        x: 'right',
-				        y: 'center',
-				        feature : {
-				            mark : {show: true},
-				            dataView : {show: true, readOnly: false},
-				            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-				            restore : {show: true},
-				            saveAsImage : {show: true}
-				        }
-				    },
-				    calculable : true,
-				    xAxis : [
-				        {
-				            type : 'category',
-				            data : ['中国民用航空局电子政务内网','中共中央对外联络部政务信息内网']
-				        }
-				    ],
-				    yAxis : [
-				        {
-				            type : 'value'
-				        }
-				    ],
-				    series : [
-				        {
-				            name:'火狐',
-				            type:'bar',
-				            data:[320, 332]
-				        },
-				        {
-				            name:'360',
-				            type:'bar',
-				            data:[120, 132]
-				        },
-				        {
-				            name:'IE',
-				            type:'bar',
-				            data:[220, 182]
-				        },
-				        {
-				            name:'搜狗',
-				            type:'bar',
-				            data:[150, 232]
-				        },
-				        {
-				            name:'UC',
-				            type:'bar',
-				            data:[862, 1018],
-				            markLine : {
-				                itemStyle:{
-				                    normal:{
-				                        lineStyle:{
-				                            type: 'dashed'
-				                        }
-				                    }
-				                },
-				                data : [
-				                    [{type : 'min'}, {type : 'max'}]
-				                ]
-				            }
-				        },
-				        {
-				            name:'谷歌',
-				            type:'bar',
-				            data:[120, 132]
-				        },				        
-				        {
-				            name:'其他',
-				            type:'bar',
-				            data:[62, 82]
-				        }
-				    ]
-				};			                                      																				
-			myChart.setOption(option, true);
-		</script>
-	</div>
+<hr/>
 </div>          
          
 <script type="text/javascript" src="<%=ctxPath %>/js/adminUser.js"></script>
@@ -251,8 +221,7 @@
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/jquery.flot.resize.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/bootstrap.js"></script>
 	<script type="text/javascript" src="<%=ctxPath %>/site/js/charts/bar.js"></script>
-<script type="text/javascript">
-    
+<script type="text/javascript"> 
     var limit=[];
     var Text=[];
     var Pox=document.getElementsByTagName('*');//不要*自己改什么节点下的XXX
@@ -264,25 +233,7 @@
                 Pox[i].innerHTML=Text[i].substring(0,limit[i])+"...";
             }
         }
-    }  
-    
-		       $(document).ready(function(){
-		            $.ajax({
-		                contentType : "application/json;charset=utf-8",
-		                type : "POST",
-		                url : "index/siteinfo.do",
-		                dataType : "json",
-		                success : function(data) {
-		                        alert("ss");
-		                    $.each(data, function(i, city) {
-		                        $('#siteinfo').append(
-		                                $('<option>').text(list.sitename).attr('value',
-		                                        list.sitename));
-
-		                    });
-		                }
-		            });
-		        });					
+    }  				
 </script>
 </body>
 </html>

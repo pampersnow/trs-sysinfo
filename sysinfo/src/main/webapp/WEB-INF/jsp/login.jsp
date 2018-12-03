@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>内网访客统计平台</title>
+        <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
         <link   rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<link   rel="shortcut icon" href="/favicon.ico" />
         <!-- CSS -->

@@ -7,6 +7,7 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <link href="<%=ctxPath %>/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />     
 <title>内网访客统计平台</title>
+<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 <header class="Hui-header cl"> 
@@ -107,7 +108,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.do"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="Welcome/dowelcome.do"></iframe>
 		</div>
 	</div>
 </section>

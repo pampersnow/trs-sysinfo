@@ -70,16 +70,17 @@ public class LiveHitsController {
 	/*
 	 * 多字段模糊查询
 	 * */
-	@RequestMapping("doMores.do")
+	//wevwevw
+	/*@RequestMapping("doMores.do")
 	public ModelAndView getGueryMores(@RequestParam(value="siteid",required=false)String siteid)throws Exception{
 		//日志打印
 		logger.debug("getGueryMores====================================");
 		ModelAndView mv=new ModelAndView();
-		List<Fklb> listFklb = fklbService.getQueryMore(siteid);
+		List<Fklb> listFklb = fklbService.queryFuzzySearch(ip, area, accesstime, siteid, pageid, type, title, writetime, articleid);
 		mv.addObject("listFklb", listFklb);
 		mv.setViewName("LiveHits/livehits");
 		return mv;		
-	}
+	}*/
 	
 	@RequestMapping("doByTime.do")
 	public ModelAndView getselectFklbByTimeAll(@RequestParam(value="startTime",required=false)

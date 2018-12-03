@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.sys.pojo.Zqgk;
-import com.sys.service.ZqgkService;
-import com.sys.service.QsfxService;
 import com.sys.pojo.Qsfx;
+import com.sys.pojo.Zqgk;
+import com.sys.service.QsfxService;
+import com.sys.service.ZqgkService;
 
 /**  
 * @ClassName: SiteStatisticsController  
@@ -27,7 +27,7 @@ import com.sys.pojo.Qsfx;
 @RequestMapping("siteStat")
 @Controller
 public class SiteStatisticsController {
-	protected final static Logger log = LogManager.getLogger(AdminUserController.class);
+	protected final static Logger log = LogManager.getLogger(SiteStatisticsController.class);
 	/*业务接口注入*/
 	@Autowired
 	private ZqgkService zqgkService;	
