@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sys.mapper.RefererMapper">
+	<select id="selectRefererCount" resultType="Referer">
+		select b.`session` as session,COUNT(a.sessionid) as sessioncount
+		from zlvisitdata a,referer b
+		where a.siteid=#{siteid} and a.sessionid=b.sessionid
+		GROUP BY a.sessionid
+	</select>
+	<select id="selectHotArticlesDay" resultType="Referer">
+		SELECT title,WriteTime, COUNT( * ) AS `f_count`
+		FROM zlvisitdata
+		where siteid = #{siteid}
+		GROUP BY `title`
+		ORDER BY `f_count`
+		DESC
+		LIMIT 3
+	</select>
+	<select id="selectSite" resultType="Referer">
+		select siteid,sitename from siteinfo
+	</select>
+</mapper>
