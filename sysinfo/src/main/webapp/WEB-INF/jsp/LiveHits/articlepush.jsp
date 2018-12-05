@@ -51,25 +51,26 @@
     <table cellspacing="0" cellpadding="0"  id="tableToExcel" class="table table-border table-bordered table-bg table-hover">
         <thead>
             <tr>
-            	<th>站点ID</th>
-				<th>站点名称</th>
+            	<th>来源站点ID</th>
+				<th>来源站点名称</th>
 				<th>来源栏目ID</th>
 				<th>来源栏目名称</th>
 				<th>文档ID</th>
 				<th>文档名称</th>
 				<th>责任编辑</th>
 				<th>撰写时间</th>
-				<th>发布时间</th>
-				<th>访问量</th>
-				<th>访文档分数</th>
+				<th>首次发布时间</th>
+				<th>当前访问量</th>
+				<th>当前文档分数</th>
+				<th>文档访问链接</th>
             </tr>
         </thead>
         <tbody>
 			<c:forEach var="li" items="${doclist }" >
 				<tbody>
 					<tr >
-						<td class="teble-style">${li.sourcesiteid}</td>
-						<td class="teble-style">${li.sourcesite	}</td>
+						<td class="teble-style">${li.siteid}</td>
+						<td class="teble-style">${li.sitename	}</td>
 						<td class="teble-style">${li.sourcepageid}</td>						
 						<td class="teble-style">${li.sourcepage}</td>
 						<td class="teble-style">${li.articleid}</td>
@@ -79,6 +80,7 @@
 						<td class="teble-style"><fmt:formatDate value="${li.pubtime}" pattern="yyyy-MM-dd" /></td>
 						<td class="teble-style">${li.doccount}</td>
 						<td class="teble-style">${li.score}</td>
+						<td class="teble-style"><a style="color: blue;">${li.link}</a></td>
 					</tr>
 				</tbody>
 			</c:forEach>   

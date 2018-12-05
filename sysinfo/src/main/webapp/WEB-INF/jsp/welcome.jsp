@@ -34,7 +34,7 @@
 				<tbody>		
 					<tr>
 					 	<c:forEach items="${list}" var="lists" varStatus="vs">
-					 		<li limit="14" style="color: #1E90FF">${lists.title}</li> 
+					 		<li limit="13" style="color: #1E90FF">${lists.title}</li> 
 					 	</c:forEach>	
 					</tr> 
 				</tbody>
@@ -43,6 +43,7 @@
 				 <a href="<%=ctxPath %>/hotHits/hotarticle.do" style="color:#ADD8E6">点击更多 >></a>
 			</p>
 		</div>	
+		
 		<div class="col-md-4 column">
 			<h2 style="color:#DC143C;">
 				今日浏览量

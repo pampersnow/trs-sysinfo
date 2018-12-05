@@ -10,6 +10,7 @@ import java.util.Date;
  */
 public class Rdwz {
 	private String siteid;
+	private String sitename;
 	private String pageid;
 	private String type;
 	private String title;
@@ -18,15 +19,17 @@ public class Rdwz {
 	private Date startTime;
 	private Date endTime;
 	private Date writetime;
+	private String link;
 	public Rdwz() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Rdwz(String siteid, String pageid, String type, String title,
+	public Rdwz(String siteid,String sitename, String pageid, String type, String title,
 			int count, Date accesstime, Date startTime, Date endTime,
-			Date writetime, String articleid) {
+			Date writetime, String articleid,String link) {
 		super();
 		this.siteid = siteid;
+		this.sitename = sitename;
 		this.pageid = pageid;
 		this.type = type;
 		this.title = title;
@@ -36,6 +39,19 @@ public class Rdwz {
 		this.endTime = endTime;
 		this.writetime = writetime;
 		this.articleid = articleid;
+		this.link = link; 
+	}
+	public String getSitename() {
+		return sitename;
+	}
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
 	}
 	public Date getWritetime() {
 		return writetime;

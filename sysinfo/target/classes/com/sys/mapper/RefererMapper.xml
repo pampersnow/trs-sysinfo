@@ -10,7 +10,7 @@
 	<select id="selectHotArticlesDay" resultType="Referer">
 		SELECT title,WriteTime, COUNT( * ) AS `f_count`
 		FROM zlvisitdata
-		where siteid = #{siteid}
+		where siteid = #{siteid} and TO_DAYS(accesstime) = TO_DAYS(NOW())
 		GROUP BY `title`
 		ORDER BY `f_count`
 		DESC

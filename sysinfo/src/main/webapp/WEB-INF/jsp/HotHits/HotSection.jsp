@@ -39,8 +39,9 @@
         <thead>
             <tr>
 				<th>站点ID</th>
+				<th>站点名称</th>
 				<th>栏目ID</th>
-				<th>栏目</th>
+				<th>栏目名称</th>
 				<th>点击量</th>
             </tr>
         </thead>
@@ -49,6 +50,7 @@
 				<tbody>
 					<tr >
 					<td class="teble-style">${list.siteid}</td>
+					<td class="teble-style">${list.sitename}</td>
 					<td class="teble-style">${list.pageid}</td>
 					<td class="teble-style">${list.type}</td>
 					<td class="teble-style">${list.count}</td>						

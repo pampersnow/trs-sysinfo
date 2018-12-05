@@ -4,18 +4,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sys.mapper.HotHitsMapper">
 
-	<select id="selectByPageRdlm" resultType="Rdlm" parameterType="map">
-		SELECT siteid,pageid,`type`,
-		COUNT( * ) AS `count`
-		FROM zlvisitdata
-		GROUP BY `type`
+	<select id="selectByPageRdlm" resultType="Rdlm"
+		parameterType="map">
+		SELECT a.siteid,b.sitename,a.pageid,a.`type`, COUNT( * )
+		AS `count`
+		FROM zlvisitdata as a,siteinfo as b
+		where a.siteid = b.siteid
+		GROUP BY a.`type`
 		ORDER BY `count`
 		DESC
 		LIMIT #{currPage},#{pageSize}
 	</select>
 
 	<select id="selectCountRdlm" resultType="long">
-		SELECT COUNT( DISTINCT`type` ) FROM zlvisitdata 
+		SELECT COUNT(
+		DISTINCT`type` ) FROM zlvisitdata
 	</select>
 
 	<select id="selectRdlmByTimeAll" resultType="Rdlm"
@@ -36,19 +39,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByPageRdwz" resultType="Rdwz" parameterType="map">
-		SELECT siteid,
-		title,articleid,WriteTime,
+		SELECT a.siteid,b.sitename, a.type,a.title,a.articleid,a.WriteTime,a.link,
 		COUNT( * ) AS `COUNT`
-		FROM zlvisitdata
-		GROUP
-		BY `title`
+		FROM zlvisitdata as a,siteinfo as b
+		where a.siteid = b.siteid
+		GROUP BY a.`title`
 		ORDER BY `COUNT`
 		DESC
-		LIMIT #{currPage},#{pageSize}
+		LIMIT
+		#{currPage},#{pageSize}
 	</select>
 
 	<select id="selectCountRdwz" resultType="long">
-		SELECT COUNT( DISTINCT`title` ) FROM zlvisitdata 		
+		SELECT COUNT(
+		DISTINCT`title` ) FROM zlvisitdata
 	</select>
 
 	<select id="selectRdwzByTimeAll" resultType="Rdwz"

@@ -5,17 +5,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.sys.mapper.FklbMapper">
 
 	<select id="selectByPage" parameterType="map" resultType="Fklb">
-		SELECT
-		* FROM
-		`zlvisitdata` ORDER BY accesstime DESC limit
+		SELECT b.sitename,a.* FROM `zlvisitdata` as a,siteinfo as b
+		where a.siteid = b.siteid
+		ORDER BY a.accesstime DESC limit
 		#{currPage},#{pageSize}
 	</select>
 
 	<select id="selectCount" resultType="long">
-		SELECT COUNT(id) FROM zlvisitdata
+		SELECT COUNT(id) FROM
+		zlvisitdata
 	</select>
 
-	<select id="selectFuzzySearch" resultType="Fklb" parameterType="String">
+	<select id="selectFuzzySearch" resultType="Fklb"
+		parameterType="String">
 		SELECT * FROM zlvisitdata
 		<where>
 			<if test="ip != null and ip != ''">

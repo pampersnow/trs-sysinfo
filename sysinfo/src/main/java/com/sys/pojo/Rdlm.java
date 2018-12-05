@@ -11,16 +11,23 @@ import java.util.Date;
 public class Rdlm {
 
 		private String siteid;
+		private String sitename;
 		private String pageid;
 		private Integer count;
 		private Date accesstime;
 		private Date startTime;
 		private Date endTime;
+		public String getSitename() {
+			return sitename;
+		}
+		public void setSitename(String sitename) {
+			this.sitename = sitename;
+		}
 		public Rdlm() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
-		public Rdlm(String siteid, String pageid, Integer count,
+		public Rdlm(String siteid,String sitename, String pageid, Integer count,
 				Date accesstime, Date startTime, Date endTime, String type) {
 			super();
 			this.siteid = siteid;
@@ -30,6 +37,7 @@ public class Rdlm {
 			this.startTime = startTime;
 			this.endTime = endTime;
 			this.type = type;
+			this.sitename = sitename;
 		}
 		public Date getStartTime() {
 			return startTime;

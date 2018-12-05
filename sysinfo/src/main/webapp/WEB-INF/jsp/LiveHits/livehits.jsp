@@ -67,10 +67,12 @@ function sub(){
 				<th>访客地区</th>
 				<th>访问时间</th>
 				<th>站点ID</th>
+				<th>站点名称</th>
 				<th>栏目ID</th>
 				<th>栏目名称</th>
 				<th>文章ID</th>
 				<th>文章标题</th>
+				<th>文档访问链接</th>
             </tr>
         </thead>
         <tbody>
@@ -81,10 +83,12 @@ function sub(){
 						<td class="teble-style">${listfklb.area }</td>
 						<td class="teble-style"><fmt:formatDate value="${listfklb.accesstime}" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 						<td class="teble-style">${listfklb.siteid }</td>
+						<td class="teble-style">${listfklb.sitename }</td>
 						<td class="teble-style">${listfklb.pageid }</td>
 						<td class="teble-style">${listfklb.type }</td>
 						<td class="teble-style">${listfklb.articleid }</td>
 						<td class="teble-style">${listfklb.title }</td>
+						<td class="teble-style"><a style="color: blue;">${listfklb.link}</a></td>
 					</tr>
 				</tbody>
 			</c:forEach>  

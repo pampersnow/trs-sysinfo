@@ -27,6 +27,29 @@
 <body>
     <h1 class="page-title">
 		>>站点访问统计
+		<span class="select-box" style="float: right; width: 150px;">
+				<select id="test" class="select" size="1" name="province" onChange="tt(this.id)" style="font-size:14px;color: #1E90FF">												
+				</select>	
+				<script>
+					$.ajax({
+						url : '../Welcome/getSite.do',
+						date : "",
+						type : 'get',
+						dataType : "json",
+						async : false, //同步
+						contentType : 'application/json;charset=UTF-8',
+						success : function(data) {
+					          /* if(data['success']){ */
+		                          var html="<option value=''>请选择站点</option>";
+		                          for(var i=0;i<data.length;i++){
+		                               html += "<option value= '"+data[i].siteid+"'>"+data[i].sitename+"</option>";
+		                          }
+		                          $("#test").html('').append(html);  
+		                      /* } */
+						}
+					})            
+			</script>			
+			</span>&nbsp;&nbsp;&nbsp;
 	</h1>
 	<div class="container">
 					<div class="widget">

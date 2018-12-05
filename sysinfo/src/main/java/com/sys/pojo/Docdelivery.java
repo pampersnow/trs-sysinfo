@@ -13,8 +13,8 @@ import java.util.Date;
 public class Docdelivery {
 	private int	id;                           
 	private int articleid;                   
-	private int sourcesiteid;           
-	private String sourcesite;              
+	private int siteid;           
+	private String sitename;              
 	private int sourcepageid;            
 	private String sourcepage;              
 	private String editorcharge;          
@@ -23,6 +23,13 @@ public class Docdelivery {
 	private int doccount;                 
 	private Date pubtime;        
 	private int score;
+	private String link;
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
 	public int getId() {
 		return id;
 	}
@@ -35,17 +42,17 @@ public class Docdelivery {
 	public void setArticleid(int articleid) {
 		this.articleid = articleid;
 	}
-	public int getSourcesiteid() {
-		return sourcesiteid;
+	public int getSiteid() {
+		return siteid;
 	}
-	public void setSourcesiteid(int sourcesiteid) {
-		this.sourcesiteid = sourcesiteid;
+	public void setSiteid(int siteid) {
+		this.siteid = siteid;
 	}
-	public String getSourcesite() {
-		return sourcesite;
+	public String getSitename() {
+		return sitename;
 	}
-	public void setSourcesite(String sourcesite) {
-		this.sourcesite = sourcesite;
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
 	}
 	public int getSourcepageid() {
 		return sourcepageid;
@@ -95,4 +102,5 @@ public class Docdelivery {
 	public void setScore(int score) {
 		this.score = score;
 	}
+	
 }

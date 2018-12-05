@@ -39,22 +39,26 @@
     <table cellspacing="0" cellpadding="0"  id="tableToExcel" class="table table-border table-bordered table-bg table-hover">
         <thead>
             <tr>
-				<th>站点ID</th>
-				<th>文章URL</th>
+				<th>所属站点名称</th>
+				<th>所属站点下栏目</th>
+				<th>文章ID</th>
 				<th>文章标题</th>
 				<th>文章撰写时间</th>
 				<th>点击量</th>
+				<th>文档访问链接</th>
             </tr>
         </thead>
         <tbody>
 			<c:forEach var="li" items="${rdwzList }" >
 				<tbody>
 					<tr >
-						<td class="teble-style">${li.siteid}</td>
+						<td class="teble-style">${li.sitename}</td>
+						<td class="teble-style">${li.type}</td>
 						<td class="teble-style">${li.articleid}</td>
 						<td class="teble-style">${li.title}</td>
 						<td class="teble-style"><fmt:formatDate value="${li.writetime}" pattern="yyyy-MM-dd" /></td>
 						<td class="teble-style">${li.count}</td>
+						<td class="teble-style"><a style="color: blue;">${li.link}</a></td>
 					</tr>
 				</tbody>
 			</c:forEach>  

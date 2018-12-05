@@ -17,10 +17,18 @@ public class Fklb {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")  
 	private Date accesstime;
 	private String siteid;
+	private String sitename;
 	private String pageid;
 	private String type;
 	private Date startTime;
 	private String articleid;
+	private String link;
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
 	public String getArticleid() {
 		return articleid;
 	}
@@ -91,9 +99,15 @@ public class Fklb {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getSitename() {
+		return sitename;
+	}
+	public void setSitename(String sitename) {
+		this.sitename = sitename;
+	}
 	public Fklb(int id, String ip, String area, Date accesstime, String siteid,
-			String pageid, String type, Date startTime, String articleid,
-			Date endTime, String title) {
+			String pageid,String sitename, String type, Date startTime, String articleid,
+			Date endTime, String title,String link) {
 		super();
 		this.id = id;
 		this.ip = ip;
@@ -106,6 +120,8 @@ public class Fklb {
 		this.articleid = articleid;
 		this.endTime = endTime;
 		this.title = title;
+		this.link = link;
+		this.sitename = sitename;
 	}
 	public Fklb() {
 		super();
