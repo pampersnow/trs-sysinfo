@@ -7,7 +7,7 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <link href="<%=ctxPath %>/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />     
 <title>内网访客统计平台</title>
-<link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 <header class="Hui-header cl"> 
@@ -53,7 +53,8 @@
                 <dd>
                     <ul>
                     	<li><a _href="<%=ctxPath %>/liveHits/VisitorList.do" href="javascript:void(0)">访客列表</a></li>               
-                    	<li><a _href="<%=ctxPath %>/liveHits/articlepush.do" href="javascript:void(0)">推送列表</a></li>               
+                    	<li><a _href="<%=ctxPath %>/liveHits/articlepush.do" href="javascript:void(0)">推送列表</a></li> 
+                    	<li><a _href="<%=ctxPath %>/addDataInfo.do" href="javascript:void(0)">数据接口</a></li>               
                     </ul>
                 </dd>
             </dl>

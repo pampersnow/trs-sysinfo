@@ -23,6 +23,14 @@ public class Fklb {
 	private Date startTime;
 	private String articleid;
 	private String link;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")  
+	private Date writetime;
+	public Date getWritetime() {
+		return writetime;
+	}
+	public void setWritetime(Date writetime) {
+		this.writetime = writetime;
+	}
 	public String getLink() {
 		return link;
 	}
@@ -105,27 +113,39 @@ public class Fklb {
 	public void setSitename(String sitename) {
 		this.sitename = sitename;
 	}
-	public Fklb(int id, String ip, String area, Date accesstime, String siteid,
-			String pageid,String sitename, String type, Date startTime, String articleid,
-			Date endTime, String title,String link) {
+	
+	private int sessionid;
+	
+	public int getSessionid() {
+		return sessionid;
+	}
+	public void setSessionid(int sessionid) {
+		this.sessionid = sessionid;
+	}
+	public Fklb(int id, String ip, String area, Date accesstime, String siteid, String sitename, String pageid,
+			String type, Date startTime, String articleid, String link, Date writetime, Date endTime, String title,
+			int sessionid) {
 		super();
 		this.id = id;
 		this.ip = ip;
 		this.area = area;
 		this.accesstime = accesstime;
 		this.siteid = siteid;
+		this.sitename = sitename;
 		this.pageid = pageid;
 		this.type = type;
 		this.startTime = startTime;
 		this.articleid = articleid;
+		this.link = link;
+		this.writetime = writetime;
 		this.endTime = endTime;
 		this.title = title;
-		this.link = link;
-		this.sitename = sitename;
+		this.sessionid = sessionid;
 	}
 	public Fklb() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
 }

@@ -5,6 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>内网访客统计平台</title>
+        <%String ctxPath = request.getContextPath(); %>
         <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
         <link   rel="icon" href="/favicon.ico" type="image/x-icon" />
 		<link   rel="shortcut icon" href="/favicon.ico" />
@@ -30,12 +31,11 @@
                 <input type="password" name="password" class="password" placeholder="Password"><span class="PWshowNULL" style="color: red;"></span>
                 <div style="text-align: left; margin-left:2px;">
 	                <label><input type="checkbox" checked="checked"  id="rememberMe"style="width:12px; height:12px;" />&nbsp;记住密码</label>
+	               <a href="/adminUser/adminUserAdd">没有账号?点击注册</a>
                 </div>
                 <button type="button" id="login">登录</button>
-                <button type="button" id="reseted" style="background:none repeat scroll 0 0 #86d8d4;border:1px solid #86d8d4;">取消</button>
-                <br>
-                <a href="/adminUser/adminUserAdd">注册</a>
-            </form>
+                <button type="button" id="reseted" style="background:none repeat scroll 0 0 #86d8d4;border:1px solid #86d8d4;">取消</button>           
+            </form>           
         </div>
         <!-- Javascript -->
         <script type="text/javascript" src="js/common/jquery/jquery1.8.3.min.js"></script>
@@ -114,7 +114,7 @@
 			    	window.open("","_self");   
 			    	window.close(); 
 			    });
-			});
+			});		
         </script>
     </body>
 
