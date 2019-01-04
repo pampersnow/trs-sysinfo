@@ -78,4 +78,9 @@
 	      <scripting-invalid>false</scripting-invalid> 
 	    </jsp-property-group> 
 	</jsp-config>
+	
+	<error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/jsp/ExceptionPage/404.jsp</location>
+  </error-page>
 </web-app>

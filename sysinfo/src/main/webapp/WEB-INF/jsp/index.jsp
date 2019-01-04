@@ -9,7 +9,7 @@
 <title>内网访客统计平台</title>
 <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/>
 </head>
-<body>
+<body style="overflow-y: hidden">
 <header class="Hui-header cl"> 
     <a class="Hui-logo l" title="内网访客统计平台">内网访客统计平台</a>     
 	<ul class="Hui-userbar">
@@ -17,7 +17,7 @@
 		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="Hui-iconfont">&#xe625;</i><a href="<%=ctxPath%>/">首页</a></li>
 		<li class="dropDown dropDown_hover"><a class="dropDown_A"><span><shiro:principal/></span> <i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
-				<li><a href="#">修改密码</a></li>
+				<li><a href="adminUser/updatePassWord.do">修改密码</a></li>
 				<li><a href="logout.do">退出</a></li>
 			</ul>
 		</li>
@@ -53,8 +53,7 @@
                 <dd>
                     <ul>
                     	<li><a _href="<%=ctxPath %>/liveHits/VisitorList.do" href="javascript:void(0)">访客列表</a></li>               
-                    	<li><a _href="<%=ctxPath %>/liveHits/articlepush.do" href="javascript:void(0)">推送列表</a></li> 
-                    	<li><a _href="<%=ctxPath %>/addDataInfo.do" href="javascript:void(0)">数据接口</a></li>               
+                    	<li><a _href="<%=ctxPath %>/liveHits/articlepush.do" href="javascript:void(0)">推送列表</a></li>              
                     </ul>
                 </dd>
             </dl>
@@ -73,6 +72,14 @@
                 <dd>
                     <ul>
                     	<li><a _href="<%=ctxPath %>/adminsite/list.do" href="javascript:void(0)">站点管理 </a></li>                   
+                    </ul>
+                </dd>
+            </dl>
+            <dl id="menu-comments">
+                <dt><i class="Hui-iconfont">&#xe654;</i> 数据接口<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                    	<li><a _href="<%=ctxPath %>/addDataInfo.do" href="javascript:void(0)">访客数据接口</a></li>                    
                     </ul>
                 </dd>
             </dl>
@@ -113,6 +120,41 @@
 		</div>
 	</div>
 </section>
+
+<!-- 修改管理员用户 -->  
+          <div id="updatePassword" >
+			    <form action="adminUser/updatePassWord.do" class="form form-horizontal" method="post">
+			    	<input type="hidden" name="id"  id="userID"/>
+			        <div class="row cl">
+			            <label class="form-label col-2">旧密码</label>
+			            <div class="formControls col-5">			           
+			            	<input type="password" class="input-text" id="password" />
+			            </div>			           		
+			        </div>
+			
+			        <div class="row cl">
+			            <label class="form-label col-2">新密码</label>
+			            <div class="formControls col-5">
+			            	<input type="password" class="input-text"  id="newpassword" />
+			            </div>		       
+			        </div>
+			        
+			        <div class="row cl">
+			            <label class="form-label col-2">确认密码</label>
+			            <div class="formControls col-5">
+			            	<input type="password" class="input-text"  id="renewpassword" />
+			            </div>			    
+			        </div>
+			        
+			
+			        <div class="row cl">
+			            <div class="col-9 col-offset-2">
+			                <input class="btn btn-primary radius" type="button" onclick="updatePW()" value="修改" />
+			                <input class="btn btn-default radius" type="button" value="关闭" onclick="closer()" style="margin-left: 30px;" />
+			            </div>
+			        </div>
+			    </form>
+		</div>  
 <script type="text/javascript" src="<%=ctxPath %>/js/role.js"></script> 
 </body>
 </html>
